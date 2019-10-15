@@ -18,8 +18,54 @@ class Welcome extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
-	public function index()
+
+	public function __construct()
 	{
-		$this->load->view('welcome_message');
+		parent::__construct();
+		$this->load->model('mwelcome');
+		$this->load->library('pagination');
+	//	$this->load->helper('url_helper');
+	}
+
+	public function index(){
+		$this->page();
+	}
+
+	public function page($page = 1)
+	{
+		$limit=40;
+		$config['base_url'] = site_url('/welcome/page');
+		$config['first_url'] = site_url('/welcome');
+		$config['first_link'] = '首页';
+		$config['last_link'] = '尾页';
+		$config['num_links']=10;
+		$config['per_page'] = $limit;
+		$config['total_rows'] = $this->mwelcome->items_count();
+		$config['use_page_numbers'] = TRUE;
+		$this->pagination->initialize($config);
+		$data['pagination']=$this->pagination->create_links();
+		//$data['news'] = $this->mwelcome->get_all_items();
+
+		//条目数据
+		$data['news']=$this->mwelcome->get_all_items($limit,($page-1)*$limit);
+
+		$this->load->view('welcome_message',$data);
+	}
+
+	/**
+	 * 跳转函数，同时记录点击数量
+	 *
+	 * 点击记数要排除机器访问
+	 */
+	public function redirect($item_id){
+	echo $item_id;
+		$this->load->library('user_agent');
+		if(!$this->agent->is_robot()){
+			$this->mwelcome->add_click_count($item_id);
+		}
+
+		Header("HTTP/1.1 303 See Other");
+		Header("Location: ".$this->mwelcome->get_item_clickurl($item_id));
+		exit;
 	}
 }
