@@ -2,9 +2,19 @@
 <html dir="ltr" lang="zh-CN">
 <head>
 	<meta charset="UTF-8" />
-	<title>搜房网而我认为二</title>
-	<meta name="keywords" content="胜多负少的服务">
-	<meta name="description" content="是访问任务">
+	<title><?php
+		if(!empty($cat_name)){
+			echo $cat_name.' - ';
+		}
+		echo $site_name;
+		?></title>
+	<meta name="keywords" content="<?php
+	if(!empty($cat_name)){
+		echo $cat_name.',';
+	}
+	echo $site_keyword; ?>">
+	<link rel="shortcut icon" href="/juan.ico" />
+	<meta name="description" content="<?php echo $site_description; ?>">
 	<link rel="stylesheet" type="text/css" media="all" href="<?php echo base_url()?>assets/bootstrap.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="<?php echo base_url()?>assets/index.css?d=20120705" />
 	<!--[if lt IE 9]>
@@ -19,7 +29,7 @@
 			<a href="<?php echo site_url();?>" title="dfgfd" rel="home" class="logo"><?php echo $site_name;?></a>
 		</h1>
 		<div id="site-op">
-			<form action="<?php echo site_url('home/search');?>">
+			<form action="<?php echo site_url('welcome/search');?>">
 				<div class="input-append">
 					<input class="span2" id="appendedInputButton" type="text" name="keyword">
 					<input class="btn" type="submit" value="搜索">

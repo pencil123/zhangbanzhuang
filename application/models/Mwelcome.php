@@ -9,6 +9,7 @@ class Mwelcome extends CI_Model{
 		parent::__construct();
 		$this->cat_table = $this->db->dbprefix('cat');
 		$this->item_table = $this->db->dbprefix('item');
+		$this->keyword_table = $this->db->dbprefix('keyword');
 	}
 
 	/**
@@ -66,6 +67,33 @@ class Mwelcome extends CI_Model{
 		}
 	}
 
+	/**
+	 * 根据关键词搜索条目
+	 *
+	 * @param string $keyword 搜索关键词
+	 * @return
+	 */
+	function searchItems_count($keyword){
+		$this->db->like('title',$keyword);
+		$this->db->or_like('sellernick',$keyword);
+		$query = $this->db->get($this->item_table);
+		return $query->num_rows();
+	}
+
+	/**
+	 * 根据关键词搜索条目
+	 *
+	 * @param string $keyword 搜索关键词
+	 * @return
+	 */
+	function searchItem($keyword,$limit=40,$offset='0'){
+		$this->db->like('title',$keyword);
+		$this->db->or_like('sellernick',$keyword);
+		$query = $this->db->get($this->item_table,$limit,$offset);
+		return $query;
+	}
+
+
 	/*
   * 通过条目ID获得点击url
    */
@@ -92,5 +120,31 @@ class Mwelcome extends CI_Model{
 		$this->db->where('id', $item_id);
 		$this->db->update($this->item_table);
 		return $item_id;
+	}
+
+
+	function add_keyword_if_not_exist($keyword){
+		$query = $this->db->get_where($this->keyword_table,array('keyword_name'=>$keyword));
+		if($query->num_rows() == 0){
+			$this->add_new_keyword($keyword);
+		}else{
+			$this->add_keyword_click($keyword);
+		}
+	}
+
+	function add_new_keyword($keyword){
+		$data = array(
+			'keyword_name' => $keyword ,
+			'keyword_click' => 1
+		);
+		$this->db->insert($this->keyword_table, $data);
+	}
+
+	function add_keyword_click($keyword){
+
+		$this->db->set('keyword_click', 'keyword_click+1', FALSE);
+		$this->db->where('keyword_name', $keyword);
+		$this->db->update($this->keyword_table);
+		return $keyword;
 	}
 }

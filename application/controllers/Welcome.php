@@ -24,6 +24,7 @@ class Welcome extends CI_Controller {
 		parent::__construct();
 		$this->load->model('mwelcome');
 		$this->load->library('pagination');
+		$this->config->load('site_info');
 	//	$this->load->helper('url_helper');
 	}
 
@@ -44,11 +45,17 @@ class Welcome extends CI_Controller {
 		$config['use_page_numbers'] = TRUE;
 		$this->pagination->initialize($config);
 		$data['pagination']=$this->pagination->create_links();
+		$data['site_name'] = $this->config->item('site_name');
 		//$data['news'] = $this->mwelcome->get_all_items();
+
+		//站点信息
+		$data['site_name'] = $this->config->item('site_name');
+		//keysords和description
+		$data['site_keyword'] = $this->config->item('site_keyword');
+		$data['site_description'] = $this->config->item('site_description');
 
 		//条目数据
 		$data['news']=$this->mwelcome->get_all_items($limit,($page-1)*$limit);
-
 		$this->load->view('welcome_message',$data);
 	}
 
@@ -67,5 +74,49 @@ class Welcome extends CI_Controller {
 		Header("HTTP/1.1 303 See Other");
 		Header("Location: ".$this->mwelcome->get_item_clickurl($item_id));
 		exit;
+	}
+
+
+	/**
+	 * 搜索结果页
+	 *
+	 */
+	public function search($page = 1){
+/*		$this->load->model('M_taobaoapi');
+		$data['cat'] = $this->M_cat->get_all_cat();*/
+
+		//获取搜索关键词+过滤
+		$data['keyword'] = trim($this->input->get('keyword', TRUE),"'\"><");
+		$limit=40;
+		$config['base_url'] = site_url('/welcome/search');
+		$config['first_url'] = site_url('/welcome');
+		$config['first_link'] = '首页';
+		$config['last_link'] = '尾页';
+		$config['num_links']=10;
+		$config['per_page'] = $limit;
+		$config['total_rows'] = $this->mwelcome->searchItems_count($data['keyword']);
+		$config['use_page_numbers'] = TRUE;
+		$config['reuse_query_string'] = TRUE;
+		$this->pagination->initialize($config);
+		$data['pagination']=$this->pagination->create_links();
+
+
+
+		$this->mwelcome->add_keyword_if_not_exist($data['keyword']);
+
+		//关键词列表，这个在后台配置
+	//	$data['keyword_list'] = $this->M_keyword->get_all_keyword(5);
+
+		//搜索条目的结果
+		$data['resp'] = $this->mwelcome->searchItem($data['keyword'],$limit,($page-1)*$limit);
+
+
+		//站点信息
+		$data['site_name'] = $this->config->item('site_name');
+		//keysords和description
+		$data['site_keyword'] = $this->config->item('site_keyword');
+		$data['site_description'] = $this->config->item('site_description');
+
+		$this->load->view('search_view',$data);
 	}
 }

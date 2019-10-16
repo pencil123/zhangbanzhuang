@@ -4,7 +4,7 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-$config['site_name'] = '33号铺';
+$config['site_name'] = '淘宝优惠券';
 
 
 //本app_id和app_secret仅做测试用途
@@ -21,5 +21,5 @@ $config['http_proxy'] = '';
 
 //SEO
 //关键词列表用英文逗号隔开
-$config['site_keyword'] = '淘宝,男装,裤子,33号铺';
-$config['site_description'] = '33号铺是一个简单好用的淘宝客瀑布流发布、管理系统。';
+$config['site_keyword'] = '淘宝优惠券,淘宝优惠,淘宝网优惠券,天猫优惠券,天猫购物券,淘宝优惠券领取,淘宝领券,粉丝福利购';
+$config['site_description'] = '淘宝优惠券专业为淘宝粉丝提供丰富的优惠券。';
