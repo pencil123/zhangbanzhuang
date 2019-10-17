@@ -3,6 +3,7 @@
 class Mwelcome extends CI_Model{
 	var $cat_table = '';
 	var $item_table = '';
+	var $tody = '';
 
 	function __construct()
 	{
@@ -10,6 +11,7 @@ class Mwelcome extends CI_Model{
 		$this->cat_table = $this->db->dbprefix('cat');
 		$this->item_table = $this->db->dbprefix('item');
 		$this->keyword_table = $this->db->dbprefix('keyword');
+		$this->today = date('Y-m-d');
 	}
 
 	/**
@@ -29,12 +31,14 @@ class Mwelcome extends CI_Model{
 		if(!empty($cat)){
 			$where = "cid=cat_id AND cat_slug='".$cat."'";
 			$this->db->join($this->cat_table,$where);
+			$this->db->where(' end_time > ',$this->today);
 			$this->db->order_by('id DESC');
 			$query = $this->db->get($this->item_table,$limit,$offset);
 		}
 		//如果是主页
 		else{
 			$this->db->order_by("id", "desc");
+			$this->db->where(' end_time > ',$this->today);
 			$query = $this->db->get($this->item_table,$limit,$offset);
 		}
 
@@ -54,6 +58,7 @@ class Mwelcome extends CI_Model{
 			$this->db->select('COUNT(id) AS count');
 			$where = "cid=cat_id AND cat_slug='".$cat_slug."'";
 			$this->db->join($this->cat_table,$where);
+			$this->db->where(' end_time > ',$this->today);
 			$this->db->order_by('id DESC');
 			$query = $this->db->get($this->item_table);
 
@@ -74,8 +79,9 @@ class Mwelcome extends CI_Model{
 	 * @return
 	 */
 	function searchItems_count($keyword){
-		$this->db->like('title',$keyword);
-		$this->db->or_like('sellernick',$keyword);
+		$this->db->like('type',$keyword);
+		$this->db->or_like('name',$keyword);
+		$this->db->where(' end_time > ',$this->today);
 		$query = $this->db->get($this->item_table);
 		return $query->num_rows();
 	}
@@ -87,8 +93,8 @@ class Mwelcome extends CI_Model{
 	 * @return
 	 */
 	function searchItem($keyword,$limit=40,$offset='0'){
-		$this->db->like('title',$keyword);
-		$this->db->or_like('sellernick',$keyword);
+		$this->db->like('type',$keyword);
+		$this->db->or_like('name',$keyword);
 		$query = $this->db->get($this->item_table,$limit,$offset);
 		return $query;
 	}

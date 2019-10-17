@@ -23,7 +23,10 @@ class Welcome extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('mwelcome');
+		$this->load->model('M_keyword');
+		$this->load->model('M_cat');
 		$this->load->library('pagination');
+
 		$this->config->load('site_info');
 	//	$this->load->helper('url_helper');
 	}
@@ -39,6 +42,7 @@ class Welcome extends CI_Controller {
 		$config['first_url'] = site_url('/welcome');
 		$config['first_link'] = '首页';
 		$config['last_link'] = '尾页';
+		$config['suffix'] = '.html';
 		$config['num_links']=10;
 		$config['per_page'] = $limit;
 		$config['total_rows'] = $this->mwelcome->items_count();
@@ -54,8 +58,15 @@ class Welcome extends CI_Controller {
 		$data['site_keyword'] = $this->config->item('site_keyword');
 		$data['site_description'] = $this->config->item('site_description');
 
+		//类别
+		$data['cat'] = $this->M_cat->get_all_cat();
+
+		//关键词列表，这个在后台配置
+		$data['keyword_list'] = $this->M_keyword->get_all_keyword(5);
+
 		//条目数据
-		$data['news']=$this->mwelcome->get_all_items($limit,($page-1)*$limit);
+		$page = ($page ==1 ) ? $page : substr($page,0,-5);
+		$data['items']=$this->mwelcome->get_all_items($limit,($page-1)*$limit);
 		$this->load->view('welcome_message',$data);
 	}
 
@@ -100,12 +111,13 @@ class Welcome extends CI_Controller {
 		$this->pagination->initialize($config);
 		$data['pagination']=$this->pagination->create_links();
 
-
+		//类别
+		$data['cat'] = $this->M_cat->get_all_cat();
 
 		$this->mwelcome->add_keyword_if_not_exist($data['keyword']);
 
 		//关键词列表，这个在后台配置
-	//	$data['keyword_list'] = $this->M_keyword->get_all_keyword(5);
+		$data['keyword_list'] = $this->M_keyword->get_all_keyword(5);
 
 		//搜索条目的结果
 		$data['resp'] = $this->mwelcome->searchItem($data['keyword'],$limit,($page-1)*$limit);

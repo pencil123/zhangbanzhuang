@@ -1,19 +1,43 @@
 <?php
 
-class M_item extends CI_Model{
+class M_command extends CI_Model{
 
-        var $cat_table = '';
+        var $juan_table = '';
         var $item_table = '';
-	    var $tody = '';
+        var $cat_table = '';
 
 	function __construct()
 	{
 		parent::__construct();
-        $this->cat_table = $this->db->dbprefix('cat');
         $this->item_table = $this->db->dbprefix('item');
-		$this->today = date('Y-m-d');
+		$this->juan_table = $this->db->dbprefix('juan');
+		$this->cat_table = $this->db->dbprefix('cat');
 	}
 
+	public function get_all_items(){
+		$query = $this->db->get($this->juan_table);
+/*		foreach ($query->result() as $row ){
+			$row->type = ((mb_strpos($row->type,"/")) == false)? $row->type : mb_substr($row->type,0,mb_strpos($row->type,"/"));
+			$row->cid = 2000;
+			$row->num_iid = "not found";
+			try {
+				$this->db->insert($this->item_table,$row);
+			} catch (Exception $e) {
+
+			}
+
+		}*/
+
+/*		$cat_query = $this->db->query("select type as cat_name,count(1) as cat_count from item group by type");
+		foreach ($cat_query->result() as $row) {
+			$row->cat_slug = $row->cat_name;
+			$this->db->insert($this->cat_table,$row);
+		}*/
+
+		$this->db->query("update item,cat set item.cid = cat.cat_id where item.type = cat.cat_name");
+
+		return true;
+	}
 
 	//通过POST传递过来的参数，可以存入到数据库中，然后返回一个“添加成功！”
 	function set_item(){
@@ -74,7 +98,6 @@ class M_item extends CI_Model{
 		if(!empty($cat)){
 			$where = "cid=cat_id AND cat_slug='".$cat."'";
 			$this->db->join($this->cat_table,$where);
-			$this->db->where(' end_time > ',$this->today);
 			$this->db->order_by('id DESC');
 			$query = $this->db->get($this->item_table,$limit,$offset);
 			}
@@ -112,68 +135,5 @@ class M_item extends CI_Model{
 				return 0;
 			}
 		}
-
 	}
-
-    /**
-     * 根据id查找条目
-     *
-     * @param integer $item_id 条目ID
-     * @return
-     */
-    // function getItem($item_id){
-    //     $data = array(
-    //            'id' => $item_id
-    //         );
-    //     $query = $this->db->get_where($this->item_table, $data);
-    //     if($query->num_rows()>0){
-    //     	$result = $query->result();
-    //     	return $result[0];
-    //     }else return null;
-    // }
-
-    /**
-     * 根据关键词搜索条目
-     *
-     * @param string $keyword 搜索关键词
-     * @return
-     */
-    function searchItem($keyword){
-		$this->db->like('title',$keyword);
-		$query = $this->db->get($this->item_table);
-		return $query;
-    }
-
-    /**
-     * 查询每个店铺对应的点击
-     *
-     * @return 查询结果
-     */
-	function query_shops(){
-		$this->db->select("sellernick,count(sellernick) as count,SUM(click_count) as sum");
-		$this->db->group_by('sellernick')->order_by('count DESC');
-		$query = $this->db->get($this->item_table);
-		return $query;
-	}
-
-    /**
-     * 判断条目是否已经存在
-     *
-     * @param integer $item_id 条目ID
-     * @return boolean 是否存在
-     */
-    // function itemExist($item_id){
-    //     $data = array(
-    //                   'id' => $item_id
-    //                );
-    //            $query = $this->db->get_where($this->item_table, $data);
-    //     if($query->num_rows() > 0){
-    //         return true;
-    //     }else {
-    //         return false;
-    //     }
-    // }
-
-
-
 }

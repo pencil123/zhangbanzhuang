@@ -35,6 +35,11 @@
 					<input class="btn" type="submit" value="搜索">
 				</div>
 				<div class="keyword-list">
+					<?php
+					foreach($keyword_list->result() as $row){
+						echo '<a href="'.site_url('welcome/search?keyword='.$row->keyword_name).'">'.$row->keyword_name.'</a>&nbsp;&nbsp;';
+					}
+					?>
 				</div>
 			</form>
 		</div>
@@ -42,22 +47,44 @@
 
 </header>
 
+<nav class="main_nav">
+	<div>
+		<ul class="menu">
+			<?php
+			$is_home = '';
+			if(empty($cat_slug)){
+				$is_home = 'current-menu-item';
+			}
+			?>
+			<li class="<?php echo $is_home;?>"><a href="<?php echo site_url()?>">全部</a></li>
+			<?php
+			foreach($cat->result() as $row){
+				$is_current = '';
+				if(!empty($cat_slug) && $row->cat_slug == $cat_slug){
+					$is_current = 'current-menu-item';
+				}
+				echo '<li class="'.$is_current.'"><a href="'.site_url('cat/'.rawurlencode($row->cat_slug)).'">'.$row->cat_name.'</a></li>';
+			}
+			?>
+		</ul>
+	</div>
+</nav>
+
 
 <div id="wrapper">
-
-	<?php if($news->num_rows()>0){ ?>
+	<?php if($items->num_rows()>0){ ?>
 		<div class="goods-all transitions-enabled masonry">
-			<?php foreach ($news->result() as $array):
+			<?php foreach ($items->result() as $array):
 				//条目
 				?>
 
 				<article class="goods">
 					<div class="entry-content">
 						<div class="goods-pic">
-							<img src="<?php echo $array->img_url ?>" class="" alt="" title="<?php echo $array->title ?>">
+							<img src="<?php echo $array->img_url ?>" class="" alt="" title="<?php echo $array->type ?>">
 
 						</div>
-						<div class="op"><div class="desc"><?php echo mb_substr($array->sellernick,0,20) ?>   / <strong>RMB<?php echo $array->price ?></strong></div>
+						<div class="op"><div class="desc"><?php echo mb_substr($array->name,0,20) ?>   / <strong>RMB<?php echo $array->price ?></strong></div>
 							<div class="buttonline">
 								<a href="<?php echo site_url('welcome/redirect').'/'.$array->id ?>" title="去购买" class="btn btn-success" target="_blank">去购买</a>
 							</div></div>

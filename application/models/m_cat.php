@@ -1,126 +1,108 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php
 
-class Home extends CI_Controller {
+class M_cat extends CI_Model{
+
+	var $cat_table = '';
+	var $item_table = '';
+	var $tody = '';
+
 
 	function __construct()
 	{
 		parent::__construct();
-		$this->load->model('M_item');
-		$this->load->model('M_keyword');
-		$this->load->library('pagination');
-		$this->load->model('M_cat');
+		$this->cat_table = $this->db->dbprefix('cat');
+		$this->item_table = $this->db->dbprefix('item');
+		$this->today = date('Y-m-d');
 	}
 
-	/**
-	 * 首页控制器
-	 *
-	 */
-	public function index(){
-		$this->page();
-	}
 
-	/**
-	 * 翻页控制器
-	 *
-	 * @param integer $page 第几页
-	 */
-	public function page($page = 1)
+	function add_cat()
 	{
-		$this->config->load('site_info');
-		//$this->output->cache(10);
-
-		$limit=40;
-		//每页显示数目
-
-		$config['base_url'] = site_url('/home/page');
-		//site_url可以防止换域名代码错误。
-
-		$config['total_rows'] = $this->M_item->count_items();
-		//这是模型里面的方法，获得总数。
-		$config['use_page_numbers'] = TRUE;
-		$config['first_url'] = site_url('/home');
-		$config['per_page'] = $limit;
-		$config['first_link'] = '首页';
-		$config['last_link'] = '尾页';
-		$config['num_links']=10;
-		//上面是自定义文字以及左右的连接数
-
-		$this->pagination->initialize($config);
-		//初始化配置
-
-		$data['pagination']=$this->pagination->create_links();
-		//通过数组传递参数
-		//以上是重点
-
-		//关键词列表，这个在后台配置
-		$data['keyword_list'] = $this->M_keyword->get_all_keyword(5);
-
-		//类别
-		$data['cat'] = $this->M_cat->get_all_cat();
-
-		//条目数据
-		$data['items']=$this->M_item->get_all_item($limit,($page-1)*$limit);
-
-		//站点信息
-		$data['site_name'] = $this->config->item('site_name');
-
-		//keysords和description
-		$data['site_keyword'] = $this->config->item('site_keyword');
-		$data['site_description'] = $this->config->item('site_description');
-
-		$this->load->view('home_view',$data);
-	}
-
-	/**
-	 * 跳转函数，同时记录点击数量
-	 *
-	 * 点击记数要排除机器访问
-	 */
-	function redirect($item_id){
-
-		$this->load->library('user_agent');
-		if(!$this->agent->is_robot()){
-			$this->M_item->add_click_count($item_id);
+		$data_decode = json_decode($_POST['data']);
+		foreach($data_decode as $cat){
+			$data = array(
+				'cat_id' => $cat -> id ,
+				'cat_name' =>$cat -> name,
+				'cat_slug' =>$cat -> name
+			);
+			$this->db->insert($this->cat_table, $data);
 		}
+	}
 
-		Header("HTTP/1.1 303 See Other");
-		Header("Location: ".$this->M_item->get_item_clickurl($item_id));
-		exit;
+	function get_cat_name($cat_slug = ''){
+		if(!empty($cat_slug)){
+			$result = $this->db->get_where($this->cat_table, array('cat_slug'=>$cat_slug))->result();
+			return $result[0]->cat_name;
+		}else {
+			return '';
+		}
+	}
+
+	function get_all_cat()
+	{
+		$this->db->order_by('cat_count desc');
+		$this->db->limit(10);
+		$query = $this->db->get($this->cat_table);
+		return $query;
+	}
+
+	function update_cat(){
+		$data_decode = json_decode($_POST['data']);
+		foreach($data_decode as $cat){
+			$data = array(
+				'cat_name' => $cat -> name,
+				'cat_slug' => $cat -> slug
+			);
+
+			$this->db->where('cat_id', $cat -> id);
+			$this->db->update($this->cat_table, $data);
+		}
+	}
+
+	function delete_cat($cat_id){
+		$this->db->delete($this->cat_table,array('cat_id'=>$cat_id));
 	}
 
 	/**
-	 * 搜索结果页
+	 * 查询每个类别对应的点击
 	 *
+	 * @return 查询结果
 	 */
-	public function search(){
-		$this->load->model('M_taobaoapi');
-		$data['cat'] = $this->M_cat->get_all_cat();
+	function query_cats(){
 
-		//获取搜索关键词+过滤
-		$data['keyword'] = trim($this->input->get('keyword', TRUE),"'\"><");
-
-		$this->M_keyword->add_keyword_if_not_exist($data['keyword']);
-
-		//关键词列表，这个在后台配置
-		$data['keyword_list'] = $this->M_keyword->get_all_keyword(5);
-
-
-		//搜索条目的结果
-		$data['resp'] = $this->M_item->searchItem($data['keyword']);
-
-
-		//站点信息
-		$data['site_name'] = $this->config->item('site_name');
-		//keysords和description
-		$data['site_keyword'] = $this->config->item('site_keyword');
-		$data['site_description'] = $this->config->item('site_description');
-
-		$this->load->view('search_view',$data);
+		$this->db->select('cat_name,COUNT(id) as count, SUM(click_count) as sum');
+		$where = "cid=cat_id";
+		$this->db->join($this->cat_table,$where);
+		$this->db->order_by('count DESC');
+		$this->db->where(' end_time > ',$this->today);
+		$this->db->group_by('cid');
+		$query = $this->db->get($this->item_table);
+		return $query;
 	}
 
-
-
+	/**
+	 * 获取某类别点击总数
+	 *
+	 * @param integer cid 类别的id
+	 * @return integer 类别点击总数
+	 */
+	function click_count_by_cid($cid=0){
+		$cat_table = $this->cat_table;
+		$item_table = $this->item_table;
+		if($cid == 0){
+			$this->db->select('SUM(click_count) as sum');
+			$query = $this->db->get($item_table);
+			$row = $query->row();
+			return $row->sum;
+		}else {
+			$this->db->where('cid='.$cid);
+			$this->db->select('SUM(click_count) as sum');
+			$query = $this->db->get($item_table);
+			if ($query->num_rows() > 0)
+			{
+				$row = $query->row();
+				return $row->sum;
+			}
+		}
+	}
 }
-
-/* End of file welcome.php */
-/* Location: ./application/controllers/welcome.php */
