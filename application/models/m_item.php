@@ -95,15 +95,15 @@ class M_item extends CI_Model{
 	 */
 	function count_items($cat_slug=''){
 		if(empty($cat_slug)){
+			$this->db->where(' end_time > ',$this->today);
 			return $this->db->count_all_results($this->item_table);
 		}else{
-
 			$this->db->select('COUNT(id) AS count');
 			$where = "cid=cat_id AND cat_slug='".$cat_slug."'";
 			$this->db->join($this->cat_table,$where);
+			$this->db->where(' end_time > ',$this->today);
 			$this->db->order_by('id DESC');
 			$query = $this->db->get($this->item_table);
-
 			if ($query->num_rows() > 0)
 			{
 			   $row = $query->row();
