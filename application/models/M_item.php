@@ -80,10 +80,10 @@ class M_item extends CI_Model{
 			}
 		//如果是主页
 		else{
+			$this->db->where(' end_time > ',$this->today);
 			$this->db->order_by("id", "desc");
 			$query = $this->db->get($this->item_table,$limit,$offset);
 		}
-
 		return $query;
 	}
 
@@ -97,10 +97,10 @@ class M_item extends CI_Model{
 		if(empty($cat_slug)){
 			return $this->db->count_all_results($this->item_table);
 		}else{
-
 			$this->db->select('COUNT(id) AS count');
 			$where = "cid=cat_id AND cat_slug='".$cat_slug."'";
 			$this->db->join($this->cat_table,$where);
+			$this->db->where(' end_time > ',$this->today);
 			$this->db->order_by('id DESC');
 			$query = $this->db->get($this->item_table);
 
