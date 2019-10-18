@@ -99,9 +99,9 @@ class M_item extends CI_Model{
 			return $this->db->count_all_results($this->item_table);
 		}else{
 			$this->db->select('COUNT(id) AS count');
-			$where = "cid=cat_id AND cat_slug='".$cat_slug."'";
+			$where = "cid=cat_id AND cat_slug='"    .$cat_slug.  "' AND end_time > ".$this->today."     ;
 			$this->db->join($this->cat_table,$where);
-			$this->db->where(' end_time > ',$this->today);
+			//$this->db->where(' end_time > ',$this->today);
 			$this->db->order_by('id DESC');
 			$query = $this->db->get($this->item_table);
 			if ($query->num_rows() > 0)
