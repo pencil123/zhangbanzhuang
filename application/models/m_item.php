@@ -4,14 +4,14 @@ class M_item extends CI_Model{
 
         var $cat_table = '';
         var $item_table = '';
-	    var $tody = '';
+	      var $tody = '';
 
 	function __construct()
 	{
 		parent::__construct();
         $this->cat_table = $this->db->dbprefix('cat');
         $this->item_table = $this->db->dbprefix('item');
-		$this->today = date('Y-m-d');
+		    $this->today = date('Y-m-d');
 	}
 
 
