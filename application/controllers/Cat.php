@@ -67,7 +67,6 @@ class Cat extends CI_Controller {
 
 		//所有条目数据
 		$data['items']=$this->M_item->get_all_item($limit,($page-1)*$limit,$cat_slug_decode);
-
 		//站点信息
 		$data['site_name'] = $this->config->item('site_name');
 
