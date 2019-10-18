@@ -53,6 +53,7 @@ class Mwelcome extends CI_Model{
 	 */
 	public function items_count(){
 		if(empty($cat_slug)){
+			$this->db->where(' end_time > ',$this->today);
 			return $this->db->count_all_results($this->item_table);
 		}else{
 			$this->db->select('COUNT(id) AS count');
