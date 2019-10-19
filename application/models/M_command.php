@@ -16,23 +16,18 @@ class M_command extends CI_Model{
 
 	public function get_all_items(){
 		$query = $this->db->get($this->juan_table);
-/*		foreach ($query->result() as $row ){
+		foreach ($query->result() as $row ){
 			$row->type = ((mb_strpos($row->type,"/")) == false)? $row->type : mb_substr($row->type,0,mb_strpos($row->type,"/"));
 			$row->cid = 2000;
 			$row->num_iid = "not found";
-			try {
-				$this->db->insert($this->item_table,$row);
-			} catch (Exception $e) {
+			$this->db->insert($this->item_table,$row);
+		}
 
-			}
-
-		}*/
-
-/*		$cat_query = $this->db->query("select type as cat_name,count(1) as cat_count from item group by type");
+		$cat_query = $this->db->query("select type as cat_name,count(1) as cat_count from item group by type");
 		foreach ($cat_query->result() as $row) {
 			$row->cat_slug = $row->cat_name;
 			$this->db->insert($this->cat_table,$row);
-		}*/
+		}
 
 		$this->db->query("update item,cat set item.cid = cat.cat_id where item.type = cat.cat_name");
 
