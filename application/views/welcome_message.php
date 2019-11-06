@@ -82,12 +82,25 @@
 					<div class="entry-content">
 						<div class="goods-pic">
 							<img src="<?php echo $array->img_url ?>" class="" alt="" title="<?php echo $array->type ?>">
-
 						</div>
-						<div class="op"><div class="desc"><?php echo mb_substr($array->name,0,20) ?>   / <strong>RMB<?php echo $array->price ?></strong></div>
-							<div class="buttonline">
-								<a href="<?php echo site_url('welcome/redirect').'/'.$array->id ?>" title="去购买" class="btn btn-success" target="_blank">去购买</a>
-							</div></div>
+						<p class="title-area">
+							<span class="shop-type">天猫</span>2019秋冬原创欧美羽绒亮面亮面亮
+						</p>
+						<div class="raw-price-area">
+							现价：¥100
+							<p class="sold">30天销售 1000</p>
+						</div>
+						<span class="info">
+							<div class="price-area">
+								<span class="rmb">¥
+								<em class="coupon-price">100</em>
+								<i></i></span>
+							</div>
+							<div class="buy-area">
+								<span class="coupon-type">天猫</span>
+								<span class="btn-title">火速领券</span>
+							</div>
+						</span>
 					</div>
 				</article>
 			<?php endforeach;?>

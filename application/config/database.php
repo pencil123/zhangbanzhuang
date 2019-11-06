@@ -75,7 +75,7 @@ $query_builder = TRUE;
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
+	'hostname' => 'dbtaobao.com',
 	'username' => '33pu',
 	'password' => '33pu',
 	'database' => '33pu',
