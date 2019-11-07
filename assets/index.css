@@ -222,7 +222,7 @@ body {
 .goods .buy-area .coupon-type {
 	display: block;
 	float: left;
-	width:40px;
+	width:38px;
 	margin:1px 0 1px 1px;
 	height: 30px;
 	background-color: #fff;
@@ -236,7 +236,7 @@ body {
 	display: block;
 	float: left;
 	height: 30px;
-	width:55px;
+	width:38px;
 	line-height: 30px;
 	font-size: 12px;
 	text-align: center;

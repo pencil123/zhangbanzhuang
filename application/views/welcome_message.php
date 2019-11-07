@@ -60,10 +60,10 @@
 			<?php
 			foreach($cat->result() as $row){
 				$is_current = '';
-				if(!empty($cat_slug) && $row->cat_slug == $cat_slug){
+				if(!empty($cat_slug) && $row->id == $cat_slug){
 					$is_current = 'current-menu-item';
 				}
-				echo '<li class="'.$is_current.'"><a href="'.site_url('cat/'.rawurlencode($row->cat_slug)).'">'.$row->cat_name.'</a></li>';
+				echo '<li class="'.$is_current.'"><a href="'.site_url('cat/'.rawurlencode($row->category_nick)).'">'.$row->category_name.'</a></li>';
 			}
 			?>
 		</ul>
@@ -81,24 +81,25 @@
 				<article class="goods">
 					<div class="entry-content">
 						<div class="goods-pic">
-							<img src="<?php echo $array->img_url ?>" class="" alt="" title="<?php echo $array->type ?>">
+							<img src="<?php echo $array->pict_url ?>" class="" alt="" title="<?php echo $array->title ?>">
 						</div>
 						<p class="title-area">
-							<span class="shop-type">天猫</span>2019秋冬原创欧美羽绒亮面亮面亮
+							<span class="shop-type">天猫</span><?php echo $array->short_title ?>
 						</p>
 						<div class="raw-price-area">
-							现价：¥100
-							<p class="sold">30天销售 1000</p>
+							现价：¥<?php echo $array->zk_final_price ?>
+							<p class="sold">30天销售:<?php echo $array->volume ?></p>
 						</div>
 						<span class="info">
 							<div class="price-area">
 								<span class="rmb">¥
-								<em class="coupon-price">100</em>
+								<em class="coupon-price"><?php echo $array->zk_final_price - $array->coupon_amount ?></em>
 								<i></i></span>
 							</div>
 							<div class="buy-area">
-								<span class="coupon-type">天猫</span>
-								<span class="btn-title">火速领券</span>
+                <a href="<?php echo $array->coupon_share_url?>" target="_blank">
+								<span class="btn-title">去领券</span>
+                </a>
 							</div>
 						</span>
 					</div>

@@ -8,8 +8,8 @@ class Mwelcome extends CI_Model{
 	function __construct()
 	{
 		parent::__construct();
-		$this->cat_table = $this->db->dbprefix('cat');
-		$this->item_table = $this->db->dbprefix('item');
+		$this->cat_table = $this->db->dbprefix('category');
+		$this->item_table = $this->db->dbprefix('material');
 		$this->keyword_table = $this->db->dbprefix('keyword');
 		$this->today = date('Y-m-d');
 	}
@@ -37,8 +37,8 @@ class Mwelcome extends CI_Model{
 		}
 		//如果是主页
 		else{
-			$this->db->order_by("id", "desc");
-			$this->db->where(' end_time > ',$this->today);
+			$this->db->order_by("volume", "desc");
+			$this->db->where(' coupon_end_time > ',$this->today);
 			$query = $this->db->get($this->item_table,$limit,$offset);
 		}
 
@@ -53,7 +53,7 @@ class Mwelcome extends CI_Model{
 	 */
 	public function items_count(){
 		if(empty($cat_slug)){
-			$this->db->where(' end_time > ',$this->today);
+			$this->db->where(' coupon_end_time > ',$this->today);
 			return $this->db->count_all_results($this->item_table);
 		}else{
 			$this->db->select('COUNT(id) AS count');

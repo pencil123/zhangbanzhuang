@@ -24,7 +24,7 @@ class Cat extends CI_Controller {
 	 *@offset integer 数据库偏移，如果是40则从40开始读取数据
 	 *
 	 */
-	public function index($cat_slug,$page = 1)
+	public function index($category_nick,$page = 1)
 	{
        //$this->output->cache(10);
 	   // todo 修改为页码数
@@ -33,12 +33,12 @@ class Cat extends CI_Controller {
 
 		$limit=40;
 		//每页显示数目
-		$cat_slug_decode = rawurldecode($cat_slug);
+        $category_nick_decode = rawurldecode($category_nick);
 
-		$config['base_url'] = site_url('/cat/'.$cat_slug);
+		$config['base_url'] = site_url('/cat/'.$category_nick);
 		//site_url可以防止换域名代码错误。
 
-		$config['total_rows'] = $this->M_item->count_items($cat_slug_decode);
+		$config['total_rows'] = $this->M_item->count_items($category_nick_decode);
 		//这是模型里面的方法，获得总数。
 		$config['suffix'] = '.html';
 		$config['per_page'] = $limit;
@@ -58,14 +58,14 @@ class Cat extends CI_Controller {
 		$data['keyword_list'] = $this->M_keyword->get_all_keyword(5);
 
 		//分类标题
-		$data['cat_name'] = $this->M_cat->get_cat_name($cat_slug_decode);
+		$data['cat_name'] = $this->M_cat->get_cat_name($category_nick_decode);
 
 		$data['cat']=$this->M_cat->get_all_cat();
 
-		$data['cat_slug'] = $cat_slug_decode;
+		$data['cat_slug'] = $category_nick_decode;
 
 		//所有条目数据
-		$data['items']=$this->M_item->get_all_item($limit,($page-1)*$limit,$cat_slug_decode);
+		$data['items']=$this->M_item->get_all_item($limit,($page-1)*$limit,$category_nick_decode);
 		//站点信息
 		$data['site_name'] = $this->config->item('site_name');
 		//keysords和description

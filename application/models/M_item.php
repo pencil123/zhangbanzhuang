@@ -9,8 +9,8 @@ class M_item extends CI_Model{
 	function __construct()
 	{
 		parent::__construct();
-        $this->cat_table = $this->db->dbprefix('cat');
-        $this->item_table = $this->db->dbprefix('item');
+        $this->cat_table = $this->db->dbprefix('category');
+        $this->item_table = $this->db->dbprefix('material');
 		$this->today = date('Y-m-d');
 	}
 
@@ -72,10 +72,10 @@ class M_item extends CI_Model{
 
 		//如果是分类页
 		if(!empty($cat)){
-			$where = "cid=cat_id AND cat_slug='".$cat."'";
+			$where = "material.my_category_id=category.id AND category_nick='".$cat."'";
 			$this->db->join($this->cat_table,$where);
-			$this->db->where(' end_time > ',$this->today);
-			$this->db->order_by('id DESC');
+			$this->db->where(' coupon_end_time > ',$this->today);
+			$this->db->order_by('material.id DESC');
 			$query = $this->db->get($this->item_table,$limit,$offset);
 			}
 		//如果是主页
@@ -93,15 +93,15 @@ class M_item extends CI_Model{
 	 * @param string cat_slug 类别的slug
 	 * @return integer 类别的数目
 	 */
-	function count_items($cat_slug=''){
-		if(empty($cat_slug)){
+	function count_items($category_nick=''){
+		if(empty($category_nick)){
 			return $this->db->count_all_results($this->item_table);
 		}else{
-			$this->db->select('COUNT(id) AS count');
-			$where = "cid=cat_id AND cat_slug='".$cat_slug."'";
+			$this->db->select('COUNT(material.id) AS count');
+			$where = "my_category_id=category.id AND category_nick='".$category_nick."'";
 			$this->db->join($this->cat_table,$where);
-			$this->db->where(' end_time > ',$this->today);
-			$this->db->order_by('id DESC');
+			$this->db->where(' coupon_end_time > ',$this->today);
+			$this->db->order_by('material.id DESC');
 			$query = $this->db->get($this->item_table);
 
 			if ($query->num_rows() > 0)
