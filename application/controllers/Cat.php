@@ -60,7 +60,6 @@ class Cat extends CI_Controller {
 		//分类标题
 		$data['cat_name'] = $this->M_cat->get_cat_name($cat_slug_decode);
 
-		$this->load->model('M_cat');
 		$data['cat']=$this->M_cat->get_all_cat();
 
 		$data['cat_slug'] = $cat_slug_decode;
@@ -69,7 +68,6 @@ class Cat extends CI_Controller {
 		$data['items']=$this->M_item->get_all_item($limit,($page-1)*$limit,$cat_slug_decode);
 		//站点信息
 		$data['site_name'] = $this->config->item('site_name');
-
 		//keysords和description
 		$data['site_keyword'] = $this->config->item('site_keyword');
 		$data['site_description'] = $this->config->item('site_description');
