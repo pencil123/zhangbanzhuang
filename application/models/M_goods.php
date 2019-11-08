@@ -20,7 +20,7 @@ class M_goods extends CI_Model{
 	}
 
 	public function goods_info($goods_id){
-		$query = $this->db->get($this->goods_table,array("id"=>$goods_id));
+		$query = $this->db->get_where($this->goods_table,array('id'=>$goods_id));
 		return $query->row();
 	}
 }

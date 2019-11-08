@@ -48,24 +48,24 @@
 </header>
 
 <nav class="main_nav">
-	<div>
-		<ul class="menu">
-			<?php
-			$is_home = '';
-			if(empty($cat_slug)){
-				$is_home = 'current-menu-item';
-			}
-			?>
-			<li class="<?php echo $is_home;?>"><a href="<?php echo site_url()?>">全部</a></li>
-			<?php
-			foreach($cat->result() as $row){
-				$is_current = '';
-				if(!empty($cat_slug) && $row->cat_slug == $cat_slug){
-					$is_current = 'current-menu-item';
-				}
-				echo '<li class="'.$is_current.'"><a href="'.site_url('cat/'.rawurlencode($row->cat_slug)).'">'.$row->cat_name.'</a></li>';
-			}
-			?>
-		</ul>
-	</div>
+  <div>
+    <ul class="menu">
+        <?php
+        $is_home = '';
+        if(empty($cat_slug)){
+            $is_home = 'current-menu-item';
+        }
+        ?>
+      <li class="<?php echo $is_home;?>"><a href="<?php echo site_url()?>">全部</a></li>
+        <?php
+        foreach($cat->result() as $row){
+            $is_current = '';
+            if(!empty($cat_slug) && $row->id == $cat_slug){
+                $is_current = 'current-menu-item';
+            }
+            echo '<li class="'.$is_current.'"><a href="'.site_url('cat/'.rawurlencode($row->category_nick)).'">'.$row->category_name.'</a></li>';
+        }
+        ?>
+    </ul>
+  </div>
 </nav>
