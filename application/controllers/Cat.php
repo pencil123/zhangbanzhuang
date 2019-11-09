@@ -26,15 +26,10 @@ class Cat extends CI_Controller {
 	 */
 	public function index($category_nick,$page = 1)
 	{
-       //$this->output->cache(10);
-	   // todo 修改为页码数
 		$page = ($page ==1 ) ? $page : substr($page,0,-5);
-		$this->config->load('site_info');
-
 		$limit=40;
 		//每页显示数目
-        $category_nick_decode = rawurldecode($category_nick);
-
+		$category_nick_decode = rawurldecode($category_nick);
 		$config['base_url'] = site_url('/cat/'.$category_nick);
 		//site_url可以防止换域名代码错误。
 
@@ -48,32 +43,36 @@ class Cat extends CI_Controller {
 		$config['use_page_numbers'] = TRUE;
 		//上面是自定义文字以及左右的连接数
 
+
+		$this->config->load('site_info');
+		//站点信息
+		$header['site_name'] = $this->config->item('site_name');
+		//keysords和description
+		$header['site_keyword'] = $this->config->item('site_keyword');
+		$header['site_description'] = $this->config->item('site_description');
+		//关键词列表，这个在后台配置
+		$header['keyword_list'] = $this->M_keyword->get_all_keyword(5);
+		//分类标题
+		$header['cat']=$this->M_cat->get_all_cat();
+		$header['cat_slug'] = $category_nick_decode;
+
+
+
 		$this->pagination->initialize($config);
 		//初始化配置
 
 		$data['pagination']=$this->pagination->create_links();
 		//通过数组传递参数
 
-		//关键词列表，这个在后台配置
-		$data['keyword_list'] = $this->M_keyword->get_all_keyword(5);
-
 		//分类标题
 		$data['cat_name'] = $this->M_cat->get_cat_name($category_nick_decode);
 
-		$data['cat']=$this->M_cat->get_all_cat();
-
-		$data['cat_slug'] = $category_nick_decode;
 
 		//所有条目数据
 		$data['items']=$this->M_item->get_all_item($limit,($page-1)*$limit,$category_nick_decode);
-		//站点信息
-		$data['site_name'] = $this->config->item('site_name');
-		//keysords和description
-		$data['site_keyword'] = $this->config->item('site_keyword');
-		$data['site_description'] = $this->config->item('site_description');
-
+		$this->load->view("header",$header);
 		$this->load->view('welcome_message',$data);
-
+		$this->load->view('footer');
 	}
 
 	/**
@@ -92,11 +91,6 @@ class Cat extends CI_Controller {
 
 		return call_user_func_array(array('Cat', 'index'), $params);
 	}
-
-
-
-
-
 }
 
 /* End of file welcome.php */

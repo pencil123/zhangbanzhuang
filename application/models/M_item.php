@@ -73,6 +73,7 @@ class M_item extends CI_Model{
 		//如果是分类页
 		if(!empty($cat)){
 			$where = "material.my_category_id=category.id AND category_nick='".$cat."'";
+			$this->db->select('material.*');
 			$this->db->join($this->cat_table,$where);
 			$this->db->where(' coupon_end_time > ',$this->today);
 			$this->db->order_by('material.id DESC');

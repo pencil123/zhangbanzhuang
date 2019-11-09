@@ -1,72 +1,3 @@
-<!DOCTYPE html>
-<html dir="ltr" lang="zh-CN">
-<head>
-<meta charset="UTF-8" />
-	<title><?php echo $site_name;?></title>
-	<meta name="keywords" content="<?php
-	if(!empty($keyword)){
-		echo $keyword.',';
-	}
-	echo $site_keyword; ?>">
-	<meta name="description" content="<?php echo $site_description; ?>">
-	<link rel="shortcut icon" href="/juan.ico" />
-	<link rel="stylesheet" type="text/css" media="all" href="<?php echo base_url()?>assets/bootstrap.css" />
-	<link rel="stylesheet" type="text/css" media="all" href="<?php echo base_url()?>assets/index.css?d=20120705" />
-	<!--[if lt IE 9]>
-	<script src="<?php echo base_url()?>assets/js/html5shiv.js"></script>
-	<![endif]-->
-</head>
-<body>
-
-<header id="branding" role="banner">
-    <div id="site-title">
-        <h1>
-            <a href="<?php echo site_url();?>" title="<?php echo $site_name;?>" rel="home" class="logo"><?php echo $site_name;?></a>
-        </h1>
-		<div id="site-op">
-			<form action="<?php echo site_url('welcome/search');?>">
-				<div class="input-append">
-				  <input class="span2" id="appendedInputButton" type="text" name="keyword">
-				  <input class="btn" type="submit" value="搜索">
-				</div>
-				<div class="keyword-list">
-					<?php
-					foreach($keyword_list->result() as $row){
-						echo '<a href="'.site_url('welcome/search?keyword='.$row->keyword_name).'">'.$row->keyword_name.'</a>&nbsp;&nbsp;';
-					}
-					?>
-				</div>
-			</form>
-		</div>
-    </div>
-
-</header>
-
-
-<nav class="main_nav">
-	<div>
-		<ul class="menu">
-			<?php
-			$is_home = '';
-			if(empty($cat_slug)){
-				$is_home = 'current-menu-item';
-			}
-			?>
-			<li class="<?php echo $is_home;?>"><a href="<?php echo site_url()?>">全部</a></li>
-			<?php
-			foreach($cat->result() as $row){
-				$is_current = '';
-				if(!empty($cat_slug) && $row->cat_slug == $cat_slug){
-					$is_current = 'current-menu-item';
-				}
-				echo '<li class="'.$is_current.'"><a href="'.site_url('cat/'.rawurlencode($row->cat_slug)).'">'.$row->cat_name.'</a></li>';
-			}
-			?>
-		</ul>
-	</div>
-</nav>
-
-
 <div id="wrapper">
 <?php 
 if($resp->num_rows() == 0){
@@ -86,14 +17,30 @@ if($resp->num_rows() == 0){
 
 		<article class="goods">
 			<div class="entry-content">
-			<div class="goods-pic">
-				<img src="<?php echo $array->img_url ?>" class="" alt="" title="<?php echo $array->type ?>">
-
-			</div>
-				<div class="op"><div class="desc"><?php echo mb_substr($array->name,0,20) ?>   / <strong>RMB<?php echo $array->price ?></strong></div>
-				<div class="buttonline">
-					<a href="<?php echo site_url('welcome/redirect').'/'.$array->id ?>" title="去购买" class="btn btn-success" target="_blank">去购买</a>
-				</div></div>
+				<div class="goods-pic">
+					<a href="/goods/info/<?php echo $array->id ?>">
+						<img src="<?php echo $array->pict_url ?>"  alt="<?php echo $array->title ?>" title="<?php echo $array->title ?>">
+					</a>
+				</div>
+				<p class="title-area">
+					<span class="shop-type">天猫</span><?php echo $array->short_title ?>
+				</p>
+				<div class="raw-price-area">
+					现价：¥<?php echo $array->zk_final_price ?>
+					<p class="sold">30天销售:<?php echo $array->volume ?></p>
+				</div>
+				<span class="info">
+							<div class="price-area">
+								<span class="rmb">¥
+								<em class="coupon-price"><?php echo $array->zk_final_price - $array->coupon_amount ?></em>
+								<i></i></span>
+							</div>
+							<div class="buy-area">
+                <a href="/jumper/coupon/<?php echo $array->id?>.html" target="_blank">
+								<span class="btn-title">去领券</span>
+                </a>
+							</div>
+						</span>
 			</div>
 		</article>
 	<?php endforeach;?>
@@ -110,16 +57,3 @@ if($resp->num_rows() == 0){
 		<?=$pagination;?>
 	</div>
 </div><!-- .pagenav_wrapper -->
-
-
-
-
-<footer id="ft" class="main-footer" role="contentinfo">
-		<p><a href="<?php echo site_url();?>" title="<?php echo $site_name;?>"><?php echo $site_name;?>
-			</a> ©   • Powered by <a href="https://github.com/yuguo/33pu" title="Powered by 33号铺, 一个开源的购物推荐系统">33号铺</a></p>
-</footer>
-
-
-
-</body>
-<html>

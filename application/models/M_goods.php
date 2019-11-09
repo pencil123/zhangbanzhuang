@@ -23,4 +23,10 @@ class M_goods extends CI_Model{
 		$query = $this->db->get_where($this->goods_table,array('id'=>$goods_id));
 		return $query->row();
 	}
+
+	public function coupon_share_url($goodsid){
+		$this->db->select('coupon_share_url');
+		$query = $this->db->get_where($this->goods_table,array('id'=>$goodsid));
+		return $query->row();
+	}
 }

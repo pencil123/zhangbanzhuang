@@ -21,7 +21,8 @@ class M_guesslike extends CI_Model{
         $this->load->database();
     }
 
-    public function guess_like($category_id){
+    public function guess_like($category_id,$goods_id){
+    	$this->db->where('goods_id != '.$goods_id);
         $query = $this->db->get_where($this->guesslike_table,array("category_id"=>$category_id),10);
         return $query;
     }

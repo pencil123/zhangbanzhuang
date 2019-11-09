@@ -29,7 +29,7 @@
 			<a href="<?php echo site_url();?>" title="dfgfd" rel="home" class="logo"><?php echo $site_name;?></a>
 		</h1>
 		<div id="site-op">
-			<form action="<?php echo site_url('welcome/search');?>">
+			<form action="<?php echo site_url('search/');?>">
 				<div class="input-append">
 					<input class="span2" id="appendedInputButton" type="text" name="keyword">
 					<input class="btn" type="submit" value="搜索">
@@ -37,7 +37,7 @@
 				<div class="keyword-list">
 					<?php
 					foreach($keyword_list->result() as $row){
-						echo '<a href="'.site_url('welcome/search?keyword='.$row->keyword_name).'">'.$row->keyword_name.'</a>&nbsp;&nbsp;';
+						echo '<a href="'.site_url('/search/?keyword='.$row->keyword_name).'">'.$row->keyword_name.'</a>&nbsp;&nbsp;';
 					}
 					?>
 				</div>
@@ -60,10 +60,10 @@
         <?php
         foreach($cat->result() as $row){
             $is_current = '';
-            if(!empty($cat_slug) && $row->id == $cat_slug){
+            if(!empty($cat_slug) && $row->category_nick == $cat_slug){
                 $is_current = 'current-menu-item';
             }
-            echo '<li class="'.$is_current.'"><a href="'.site_url('cat/'.rawurlencode($row->category_nick)).'">'.$row->category_name.'</a></li>';
+            echo '<li class="'.$is_current.'"><a href="'.site_url('cat/'.rawurlencode($row->category_nick)).'/">'.$row->category_name.'</a></li>';
         }
         ?>
     </ul>

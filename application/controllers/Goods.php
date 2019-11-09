@@ -20,7 +20,6 @@ class Goods extends CI_Controller {
 	public function info($goodsid)
 	{
         $goods_id  = (int) rawurldecode($goodsid);
-
 		$this->config->load('site_info');
 		//站点信息
 		$header['site_name'] = $this->config->item('site_name');
@@ -34,10 +33,15 @@ class Goods extends CI_Controller {
 
         //商品信息
         $goods['details'] = $this->M_goods->goods_info($goods_id);
-        $goods['small_imgs'] =  json_decode($goods['details']->small_images)->string;
+		$small_imgs = json_decode($goods['details']->small_images);
+        if (array_key_exists("string",$small_imgs)){
+			$goods['small_imgs'] = $small_imgs->string;
+		}else {
+			$goods['small_imgs'] = array($goods['details']->pict_url);
+		}
 
         //猜你喜欢
-        $goods['guess_like'] = $this->M_guesslike->guess_like($goods['details']->my_category_id);
+        $goods['guess_like'] = $this->M_guesslike->guess_like($goods['details']->my_category_id,$goods_id);
 
 		$this->load->view("header",$header);
 		$this->load->view("goods_view",$goods);

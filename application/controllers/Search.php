@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Welcome extends CI_Controller {
+class Search extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -28,29 +28,29 @@ class Welcome extends CI_Controller {
 		$this->load->library('pagination');
 
 		$this->config->load('site_info');
-	//	$this->load->helper('url_helper');
+		//	$this->load->helper('url_helper');
 	}
+	/**
+	 * 搜索结果页
+	 *
+	 */
+	public function index($page = 1){
 
-	public function index(){
-		$this->page();
-	}
+		//获取搜索关键词+过滤
+		$data['keyword'] = trim($this->input->get('keyword', TRUE),"'\"><");
 
-	public function page($page = 1)
-	{
 		$limit=40;
-		$config['base_url'] = site_url('/welcome/page');
-		$config['first_url'] = site_url('/welcome');
+		$config['base_url'] = site_url('/search/index');
+		//$config['first_url'] = site_url('/welcome');
 		$config['first_link'] = '首页';
 		$config['last_link'] = '尾页';
-		$config['suffix'] = '.html';
 		$config['num_links']=10;
 		$config['per_page'] = $limit;
-		$config['total_rows'] = $this->mwelcome->items_count();
+		$config['total_rows'] = $this->mwelcome->searchItems_count($data['keyword']);
 		$config['use_page_numbers'] = TRUE;
+		$config['reuse_query_string'] = TRUE;
 		$this->pagination->initialize($config);
 		$data['pagination']=$this->pagination->create_links();
-
-
 
 		$this->config->load('site_info');
 		//站点信息
@@ -63,17 +63,13 @@ class Welcome extends CI_Controller {
 		//分类标题
 		$header['cat']=$this->M_cat->get_all_cat();
 
-		//类别
-		$data['cat'] = $this->M_cat->get_all_cat();
+		$this->mwelcome->add_keyword_if_not_exist($data['keyword']);
 
-		//关键词列表，这个在后台配置
-		$data['keyword_list'] = $this->M_keyword->get_all_keyword(5);
+		//搜索条目的结果
+		$data['resp'] = $this->mwelcome->searchItem($data['keyword'],$limit,($page-1)*$limit);
 
-		//条目数据
-		$page = ($page ==1 ) ? $page : substr($page,0,-5);
-		$data['items']=$this->mwelcome->get_all_items($limit,($page-1)*$limit);
 		$this->load->view("header",$header);
-		$this->load->view('welcome_message',$data);
-		$this->load->view('footer');
+		$this->load->view('search_view',$data);
+		$this->load->view("footer");
 	}
 }
