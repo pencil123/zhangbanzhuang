@@ -23,11 +23,12 @@ class Goods extends CI_Controller {
 		$this->config->load('site_info');
 		//站点信息
 		$header['site_name'] = $this->config->item('site_name');
-		//keysords和description
-        $header['site_keyword'] = $this->config->item('site_keyword');
-        $header['site_description'] = $this->config->item('site_description');
 		//关键词列表，这个在后台配置
         $header['keyword_list'] = $this->M_keyword->get_all_keyword(5);
+        $goods_header = $this->M_goods->goods_info($goods_id);
+        $header['site_title'] = $goods_header->short_title;
+        $header['site_keyword'] = $goods_header->short_title;
+        $header['site_description'] = $goods_header->title;
 		//分类标题
         $header['cat']=$this->M_cat->get_all_cat();
 

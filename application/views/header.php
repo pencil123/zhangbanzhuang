@@ -2,19 +2,18 @@
 <html dir="ltr" lang="zh-CN">
 <head>
 	<meta charset="UTF-8" />
-	<title><?php
-		if(!empty($cat_name)){
-			echo $cat_name.' - ';
-		}
-		echo $site_name;
-		?></title>
+	<title><?php echo $site_title;?></title>
 	<meta name="keywords" content="<?php
-	if(!empty($cat_name)){
-		echo $cat_name.',';
+	if(!empty($goods_header->title)) {
+		echo $goods_header->title."_".$site_name;
+	}elseif(!empty($cat_header->category_keyword)){
+		echo $cat_header->category_keyword;
+	}else{
+		echo $site_keyword;
 	}
-	echo $site_keyword; ?>">
+	?>">
 	<link rel="shortcut icon" href="/juan.ico" />
-	<meta name="description" content="<?php echo $site_description; ?>">
+	<meta name="description" content="<?php	echo $site_description;	?>">
 	<link rel="stylesheet" type="text/css" media="all" href="<?php echo base_url()?>assets/bootstrap.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="<?php echo base_url()?>assets/index.css?d=20120705" />
 	<!--[if lt IE 9]>

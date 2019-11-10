@@ -37,7 +37,7 @@ class Search extends CI_Controller {
 	public function index($page = 1){
 
 		//获取搜索关键词+过滤
-		$data['keyword'] = trim($this->input->get('keyword', TRUE),"'\"><");
+		$keyword = trim($this->input->get('keyword', TRUE),"'\"><");
 
 		$limit=40;
 		$config['base_url'] = site_url('/search/index');
@@ -46,7 +46,7 @@ class Search extends CI_Controller {
 		$config['last_link'] = '尾页';
 		$config['num_links']=10;
 		$config['per_page'] = $limit;
-		$config['total_rows'] = $this->mwelcome->searchItems_count($data['keyword']);
+		$config['total_rows'] = $this->mwelcome->searchItems_count($keyword);
 		$config['use_page_numbers'] = TRUE;
 		$config['reuse_query_string'] = TRUE;
 		$this->pagination->initialize($config);
@@ -56,6 +56,7 @@ class Search extends CI_Controller {
 		//站点信息
 		$header['site_name'] = $this->config->item('site_name');
 		//keysords和description
+		$header['site_title'] = $keyword."_".$header['site_name'];
 		$header['site_keyword'] = $this->config->item('site_keyword');
 		$header['site_description'] = $this->config->item('site_description');
 		//关键词列表，这个在后台配置
@@ -63,10 +64,11 @@ class Search extends CI_Controller {
 		//分类标题
 		$header['cat']=$this->M_cat->get_all_cat();
 
-		$this->mwelcome->add_keyword_if_not_exist($data['keyword']);
+		$this->mwelcome->add_keyword_if_not_exist($keyword);
 
 		//搜索条目的结果
-		$data['resp'] = $this->mwelcome->searchItem($data['keyword'],$limit,($page-1)*$limit);
+		$data['resp'] = $this->mwelcome->searchItem($keyword,$limit,($page-1)*$limit);
+		$data['keyword'] = $keyword;
 
 		$this->load->view("header",$header);
 		$this->load->view('search_view',$data);

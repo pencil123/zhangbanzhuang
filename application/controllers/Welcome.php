@@ -37,6 +37,18 @@ class Welcome extends CI_Controller {
 
 	public function page($page = 1)
 	{
+		$this->config->load('site_info');
+		//站点信息
+		$header['site_name'] = $this->config->item('site_name');
+		//keysords和description
+		$header['site_title'] = $this->config->item('site_title');
+		$header['site_keyword'] = $this->config->item('site_keyword');
+		$header['site_description'] = $this->config->item('site_description');
+		//关键词列表，这个在后台配置
+		$header['keyword_list'] = $this->M_keyword->get_all_keyword(5);
+		//分类标题
+		$header['cat']=$this->M_cat->get_all_cat();
+
 		$limit=40;
 		$config['base_url'] = site_url('/welcome/page');
 		$config['first_url'] = site_url('/welcome');
@@ -49,25 +61,6 @@ class Welcome extends CI_Controller {
 		$config['use_page_numbers'] = TRUE;
 		$this->pagination->initialize($config);
 		$data['pagination']=$this->pagination->create_links();
-
-
-
-		$this->config->load('site_info');
-		//站点信息
-		$header['site_name'] = $this->config->item('site_name');
-		//keysords和description
-		$header['site_keyword'] = $this->config->item('site_keyword');
-		$header['site_description'] = $this->config->item('site_description');
-		//关键词列表，这个在后台配置
-		$header['keyword_list'] = $this->M_keyword->get_all_keyword(5);
-		//分类标题
-		$header['cat']=$this->M_cat->get_all_cat();
-
-		//类别
-		$data['cat'] = $this->M_cat->get_all_cat();
-
-		//关键词列表，这个在后台配置
-		$data['keyword_list'] = $this->M_keyword->get_all_keyword(5);
 
 		//条目数据
 		$page = ($page ==1 ) ? $page : substr($page,0,-5);

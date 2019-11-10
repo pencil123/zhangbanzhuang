@@ -95,6 +95,7 @@ class Mwelcome extends CI_Model{
 	 */
 	function searchItem($keyword,$limit=40,$offset='0'){
 		$this->db->like('title',$keyword);
+		$this->db->or_like('short_title',$keyword);
 		$this->db->or_like('level_one_category_name',$keyword);
 		$this->db->where(' coupon_end_time > ',$this->today);
 		$query = $this->db->get($this->item_table,$limit,$offset);

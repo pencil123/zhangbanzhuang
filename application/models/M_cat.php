@@ -29,10 +29,10 @@ class M_cat extends CI_Model{
 		}
 	}
 
-	function get_cat_name($category_nick_decode = ''){
+	function get_cat_info($category_nick_decode = ''){
 		if(!empty($category_nick_decode)){
-			$result = $this->db->get_where($this->cat_table, array('category_nick'=>$category_nick_decode))->result();
-			return $result[0]->category_name;
+			$query = $this->db->get_where($this->cat_table, array('category_nick'=>$category_nick_decode));
+			return $query->row();
 		}else {
 			return '';
 		}
@@ -41,7 +41,7 @@ class M_cat extends CI_Model{
 	function get_all_cat()
 	{
 		$this->db->order_by('hot_points desc');
-		$this->db->limit(10);
+		$this->db->limit(13);
 		$query = $this->db->get($this->cat_table);
 		return $query;
 	}

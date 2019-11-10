@@ -321,6 +321,11 @@ body {
 	text-align: center;
 }
 
+.buy-now a:hover{
+	text-decoration: none;
+}
+
+
 .shop-info{
 	display: block;
 	padding-top: 10px;
