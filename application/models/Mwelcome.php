@@ -98,6 +98,7 @@ class Mwelcome extends CI_Model{
 		$this->db->or_like('short_title',$keyword);
 		$this->db->or_like('level_one_category_name',$keyword);
 		$this->db->where(' coupon_end_time > ',$this->today);
+		$this->db->order_by('volume DESC');
 		$query = $this->db->get($this->item_table,$limit,$offset);
 		return $query;
 	}
