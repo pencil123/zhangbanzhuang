@@ -36,7 +36,7 @@
 				<div class="keyword-list">
 					<?php
 					foreach($keyword_list->result() as $row){
-						echo '<a href="'.site_url('/search/?keyword='.$row->keyword_name).'">'.$row->keyword_name.'</a>&nbsp;&nbsp;';
+						echo '<a href="'.site_url('/search/spring/?keyword='.$row->keyword_name).'">'.$row->keyword_name.'</a>&nbsp;&nbsp;';
 					}
 					?>
 				</div>
