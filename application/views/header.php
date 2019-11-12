@@ -28,7 +28,7 @@
 			<a href="<?php echo site_url();?>" title="dfgfd" rel="home" class="logo"><?php echo $site_name;?></a>
 		</h1>
 		<div id="site-op">
-			<form action="<?php echo site_url('search/');?>">
+			<form action="<?php echo site_url('search/spring/');?>">
 				<div class="input-append">
 					<input class="span2" id="appendedInputButton" type="text" name="keyword">
 					<input class="btn" type="submit" value="搜索">
