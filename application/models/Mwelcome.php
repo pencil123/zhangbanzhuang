@@ -37,6 +37,7 @@ class Mwelcome extends CI_Model{
 		}
 		//如果是主页
 		else{
+		    $this->db->select('pict_url,title,id,short_title,zk_final_price,volume,coupon_amount');
 			$this->db->order_by("volume", "desc");
 			$this->db->where(' coupon_end_time > ',$this->today);
 			$query = $this->db->get($this->item_table,$limit,$offset);

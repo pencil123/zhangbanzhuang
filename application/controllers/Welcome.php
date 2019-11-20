@@ -35,6 +35,14 @@ class Welcome extends CI_Controller {
 		$this->page();
 	}
 
+	public function wechat($page = 1){
+	    $limit = 20;
+        $result =$this->mwelcome->get_all_items($limit,($page-1)*$limit);
+        $data['result'] = true;
+        $data['data'] = $result->result_array();
+        echo json_encode($data);
+    }
+
 	public function page($page = 1)
 	{
 		$this->config->load('site_info');
