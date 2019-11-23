@@ -1,14 +1,14 @@
-<div id="wrapper">
+<div id="wrapper" class="container">
 	<?php if($items->num_rows()>0){ ?>
-		<div class="goods-all transitions-enabled masonry">
+		<div class="goods-all transitions-enabled masonry row">
 			<?php foreach ($items->result() as $array):
 				//条目
 				?>
-				<article class="goods">
+				<article class="goods col-sm-6 col-md-4 col-lg-3 ">
 					<div class="entry-content">
 						<div class="goods-pic">
 							<a href="/goods/info/<?php echo $array->id ?>.html" target="_blank">
-							<img src="<?php echo $array->pict_url ?>" alt="<?php echo $array->title ?>" title="<?php echo $array->title ?>">
+							<img src="<?php echo $array->pict_url ?>" alt="<?php echo $array->title ?>" title="<?php echo $array->title ?>"  class="img-responsive">
 							</a>
 						</div>
 						<p class="title-area">

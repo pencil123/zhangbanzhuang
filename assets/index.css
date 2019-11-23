@@ -10,7 +10,6 @@ body {
 
 
 #wrapper {
-	width:960px;
 	margin:10px auto 20px;
 }
 .right {
@@ -22,7 +21,6 @@ body {
 /* logo */
 #site-title {
 	padding:10px 0;height:80px;
-	width: 960px;
 	margin: 0 auto;
 	position:relative;
 }
@@ -44,38 +42,27 @@ body {
 }
 
 /* 主导航 */
-.main_nav {
-	margin-bottom:10px;
+.navbar-style {
+	background-color: red;
+	min-height: auto;
+	color: white;
 }
-.main_nav ul {
-	width:960px;
-	margin:0 auto;
-	padding:4px 0;
-	font-size:14px;
-	overflow:hidden;
-	*zoom:1;
-	list-style-type:none;}
-.main_nav li {
-	float:left;
-	padding: 0 10px;
+
+.nav-pills > li a{
+	color: white;
+	font-weight: bold;
+	background-color: red;
 }
-.main_nav li:first-child {
-	border-left:0;
+
+.nav-pills > li.active a{
+	color: yellow;
+	font-weight: bolder;
+	background-color: #C21F3A !important;
 }
-.main_nav li:last-child {
-	border-right:0;
-}
-.main_nav a {
-	text-decoration:none;
-	display:block;
-	padding:5px 10px;
-	color:#444;
-}
-.main_nav .current-menu-item a {
-	border-bottom:3px solid #b00;
-}
-.main_nav a:hover {
-	border-bottom:3px solid #b00;
+
+.nav-pills > li a:hover,.nav-pills > li a:focus {
+	background-color: red;
+	color: yellow;
 }
 
 #branding #site-op {
@@ -101,30 +88,19 @@ body {
 	float:left;
 	margin:0 0px 10px;
 	padding:5px;
-	width:230px;
 }
 .goods .goods-pic {
 	position:relative;
 	margin-bottom:5px;
-	height:230px;
-	width:230px;
 }
 
 .entry-content {
 	background-color: #FFFFFF;
-	border: 1px solid #FFFFFF;
+	border: 1px solid #ddd;
+	padding: 4px;
 }
 .entry-content:hover {
 	box-shadow: 0 0 6px rgba(0,0,0,.1);
-}
-.goods .goods-pic img {
-	display:block;
-	text-decoration:none;
-	position:absolute;
-	bottom: 0;
-	-webkit-transition: opacity 0.3s;
-	-moz-transition: opacity 0.3s;
-	transition: opacity 0.3s;
 }
 .goods .goods-pic .btn_delete {
 	position:absolute;
@@ -142,17 +118,14 @@ body {
 .goods:hover .goods-pic .btn_delete {
 	display:block;
 }
-.goods .goods-pic img {
-	max-width:230px;
-	max-height:230px;
-	display:block;
-}
 
 .goods .title-area {
-	height: 16px;
 	line-height: 16px;
-	font-size: 12px;
 	padding: 10px 10px 0;
+	overflow: hidden;
+	max-width: 100%;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 .goods .shop-type {

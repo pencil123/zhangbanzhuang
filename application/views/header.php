@@ -14,7 +14,7 @@
 	?>">
 	<link rel="shortcut icon" href="/juan.ico" />
 	<meta name="description" content="<?php	echo $site_description;	?>">
-	<link rel="stylesheet" type="text/css" media="all" href="<?php echo base_url()?>assets/bootstrap.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="<?php echo base_url()?>assets/bootstrap3.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="<?php echo base_url()?>assets/index.css?d=20120705" />
 	<!--[if lt IE 9]>
 	<script src="<?php echo base_url()?>assets/js/html5shiv.js"></script>
@@ -23,7 +23,7 @@
 <body>
 
 <header id="branding" role="banner">
-	<div id="site-title">
+	<div id="site-title" class="container">
 		<h1>
 			<a href="<?php echo site_url();?>" title="dfgfd" rel="home" class="logo"><?php echo $site_name;?></a>
 		</h1>
@@ -46,23 +46,23 @@
 
 </header>
 
-<nav class="main_nav">
-  <div>
-    <ul class="menu">
+<nav class="navbar navbar-default navbar-static-top navbar-style">
+  <div class="container">
+    <ul class="nav nav-pills">
         <?php
         $is_home = '';
         if(empty($cat_slug)){
-            $is_home = 'current-menu-item';
+            $is_home = 'active';
         }
         ?>
-      <li class="<?php echo $is_home;?>"><a href="<?php echo site_url()?>">全部</a></li>
+      <li role="presentation" class=" <?php echo $is_home;?>"><a href="<?php echo site_url()?>">全部</a></li>
         <?php
         foreach($cat->result() as $row){
             $is_current = '';
             if(!empty($cat_slug) && $row->category_nick == $cat_slug){
-                $is_current = 'current-menu-item';
+                $is_current = 'active';
             }
-            echo '<li class="'.$is_current.'"><a href="'.site_url('cat/'.rawurlencode($row->category_nick)).'/">'.$row->category_name.'</a></li>';
+            echo '<li role="presentation"  class="'.$is_current.'"><a href="'.site_url('cat/'.rawurlencode($row->category_nick)).'/">'.$row->category_name.'</a></li>';
         }
         ?>
     </ul>
