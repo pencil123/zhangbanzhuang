@@ -16,6 +16,7 @@
 	<meta name="description" content="<?php	echo $site_description;	?>">
 	<link rel="stylesheet" type="text/css" media="all" href="<?php echo base_url()?>assets/bootstrap3.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="<?php echo base_url()?>assets/index.css?d=20120705" />
+	<script src="<?php echo base_url()?>assets/js/jquery.js"></script>
 	<!--[if lt IE 9]>
 	<script src="<?php echo base_url()?>assets/js/html5shiv.js"></script>
 	<![endif]-->
@@ -24,23 +25,35 @@
 
 <header id="branding" role="banner">
 	<div id="site-title" class="container">
-		<h1>
-			<a href="<?php echo site_url();?>" title="dfgfd" rel="home" class="logo"><?php echo $site_name;?></a>
-		</h1>
-		<div id="site-op">
+		<div class="col-xs-3">
+			<a href="<?php echo site_url();?>" title="dfgfd" rel="home">
+				<img src="/assets/img/logo.png" class="img-responsive">
+			</a>
+		</div>
+
+
+		<div class="col-md-6 col-xs-9">
 			<form action="<?php echo site_url('search/spring/');?>">
-				<div class="input-append">
-					<input class="span2" id="appendedInputButton" type="text" name="keyword">
-					<input class="btn" type="submit" value="搜索">
-				</div>
-				<div class="keyword-list">
-					<?php
-					foreach($keyword_list->result() as $row){
-						echo '<a href="'.site_url('/search/spring/?keyword='.$row->keyword_name).'">'.$row->keyword_name.'</a>&nbsp;&nbsp;';
-					}
-					?>
+				<div class="input-group">
+					<input  type="text" name="keyword" class="form-control">
+					<span class="input-group-btn">
+						<input class="btn btn-default" type="submit" value="搜索优惠券" />
+					</span>
 				</div>
 			</form>
+			<div class="keyword-list">
+				<?php
+				foreach($keyword_list->result() as $row){
+					echo '<a href="'.site_url('/search/spring/?keyword='.$row->keyword_name).'">'.$row->keyword_name.'</a>&nbsp;&nbsp;';
+				}
+				?>
+			</div>
+		</div>
+
+		<div class="col-md-3 hidden-sm">
+			<a href="<?php echo site_url();?>" title="dfgfd" rel="home">
+				<img src="/assets/img/logo2.png" class="img-responsive">
+			</a>
 		</div>
 	</div>
 

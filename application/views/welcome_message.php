@@ -42,3 +42,16 @@
 
 	<?php } ?>
 </div>
+<script type="text/javascript">
+	reheight();
+	$(window).resize(function () {
+		reheight();
+	});
+	function reheight() {
+		var arr = [];
+		$('.goods-pic').each(function(i){
+			arr[i] = $(this).outerHeight();
+		});
+		$('.goods-pic').height(Math.max.apply(null,arr));
+	};
+</script>

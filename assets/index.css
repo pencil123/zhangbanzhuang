@@ -15,6 +15,18 @@ body {
 .right {
 	float:right;
 }
+
+/* 搜索关键词  */
+.keyword-list{
+	line-height: 16px;
+	padding: 10px 10px 0;
+	overflow: hidden;
+	max-width: 100%;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+
 /* =Header
 -------------------------------------------------------------- */
 #branding {}
