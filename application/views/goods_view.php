@@ -1,10 +1,10 @@
-<div id="wrapper">
-<div class="span9">
+<div id="wrapper" class="container row">
+<div class="col-xs-9">
 	<div class="goods-details">
-    <div class="img-area span3">
-      <img src="<?php echo $details->pict_url ?>" alt="<?php echo $details->title ?>" title="<?php echo $details->title ?>">
+    <div class="img-area col-xs-3">
+      <img src="<?php echo $details->pict_url ?>" alt="<?php echo $details->title ?>" title="<?php echo $details->title ?>" class="img-responsive">
     </div>
-    <div class="info-area span6">
+    <div class="info-area col-xs-6">
       <div class="goods-title">
           <?php echo $details->short_title ?>
       </div>
@@ -36,11 +36,11 @@
   </div>
   <div class="goods-imgs">
       <?php foreach($small_imgs as $small_img){
-        echo '<img src="'.$small_img.'" class="goods-img">';
+        echo '<img src="'.$small_img.'" class="img-responsive">';
     }?>
   </div>
 </div>
-<div class="span3 guess-area">
+<div class="col-xs-3 guess-area">
       <?php
       foreach($guess_like->result() as $like){?>
         <div class="guess">

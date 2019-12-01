@@ -17,6 +17,7 @@
 	<link rel="stylesheet" type="text/css" media="all" href="<?php echo base_url()?>assets/bootstrap3.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="<?php echo base_url()?>assets/index.css?d=20120705" />
 	<script src="<?php echo base_url()?>assets/js/jquery.js"></script>
+	<script src="<?php echo base_url()?>assets/js/shop.js"></script>
 	<!--[if lt IE 9]>
 	<script src="<?php echo base_url()?>assets/js/html5shiv.js"></script>
 	<![endif]-->

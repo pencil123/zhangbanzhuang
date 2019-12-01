@@ -8,7 +8,7 @@
 					<div class="entry-content">
 						<div class="goods-pic">
 							<a href="/goods/info/<?php echo $array->id ?>.html" target="_blank">
-							<img src="<?php echo $array->pict_url ?>" alt="<?php echo $array->title ?>" title="<?php echo $array->title ?>"  class="img-responsive">
+							<img src="<?php echo $array->pict_url ?>" alt="<?php echo $array->title ?>" title="<?php echo $array->title ?>"  class="img-responsive" name="goods_imgs">
 							</a>
 						</div>
 						<p class="title-area">
@@ -43,15 +43,12 @@
 	<?php } ?>
 </div>
 <script type="text/javascript">
-	reheight();
-	$(window).resize(function () {
-		reheight();
-	});
-	function reheight() {
-		var arr = [];
-		$('.goods-pic').each(function(i){
-			arr[i] = $(this).outerHeight();
-		});
-		$('.goods-pic').height(Math.max.apply(null,arr));
+	window.onload = function () {
+		var elems = document.getElementsByName("goods_imgs");
+		for (var i=0;i<elems.length;i++) {
+			//alert("width: " + elems[i].offsetWidth);
+			elems[i].style.height = elems[i].offsetWidth +"px";
+		}
 	};
+//	reheight();
 </script>
