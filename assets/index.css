@@ -33,7 +33,7 @@ body {
 /* logo */
 #site-title {
 	padding:10px 0;height:80px;
-	margin: 0 auto;
+	margin: 10px auto;
 	position:relative;
 }
 #site-title .logo {
@@ -260,6 +260,7 @@ body {
 	padding-top: 20px;
 	height: 81px;
 	border-top: 1px solid #eee;
+	margin-bottom: 3px;
 }
 
 .goods-price-area {
@@ -315,6 +316,7 @@ body {
 	border-top: 1px solid #eee;
 }
 .shop-info .itemview {
+	padding-left: 0px;
 	margin-top:2px;
 	margin-left: 5px;
 }
@@ -339,13 +341,14 @@ body {
 	padding-right: 20px;
 	background-color: #FFFFFF;
 }
-.goods-img {
-	margin-bottom: 10px;
+.goods-imgs img {
+	margin: 0 auto;
+	background-color: #0e0e0e;
+	margin-bottom: 5px;
 }
 
-
 .guess-area {
-	margin-left:8px;
+//	margin-left:8px;
 }
 .guess {
 	background-color: #FFFFFF;
