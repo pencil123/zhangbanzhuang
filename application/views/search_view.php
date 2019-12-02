@@ -1,4 +1,4 @@
-<div id="wrapper">
+<div id="wrapper" class="container">
 <?php 
 if($resp->num_rows() == 0){
 	//http://s8.taobao.com/search?cat=xx&sort=coefp&q=关键词&pid=mm_11111111_0_0&style=grid 
@@ -10,22 +10,22 @@ if($resp->num_rows() == 0){
 		echo '你搜索的“'.$keyword.'”没有找到本站条目。<a href="https://s.taobao.com/search?q='.
 			$keyword.'" target="_blank">在淘宝搜索更多'.$keyword.'。</a>';
 	}else if($resp->num_rows()>0){ ?>
-	<div class="goods-all transitions-enabled masonry">
+	<div class="goods-all transitions-enabled masonry row" >
 	<?php foreach ($resp->result() as $array):
 	//条目
 		?>
 
-		<article class="goods">
+		<article class="goods col-xs-6 col-md-4 col-lg-3">
 			<div class="entry-content">
 				<div class="goods-pic">
-					<a href="/goods/info/<?php echo $array->id ?>" target="_blank">
-						<img src="<?php echo $array->pict_url ?>"  alt="<?php echo $array->title ?>" title="<?php echo $array->title ?>">
+					<a href="/goods/info/<?php echo $array->id ?>.html" target="_blank">
+						<img src="<?php echo $array->pict_url ?>"  alt="<?php echo $array->title ?>" title="<?php echo $array->title ?>" class="img-responsive">
 					</a>
 				</div>
 				<p class="title-area">
 					<span class="shop-type">天猫</span><?php echo $array->short_title ?>
 				</p>
-				<div class="raw-price-area">
+				<div class="raw-price-area hidden-xs">
 					现价：¥<?php echo $array->zk_final_price ?>
 					<p class="sold">30天销售:<?php echo $array->volume ?></p>
 				</div>
