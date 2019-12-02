@@ -1,11 +1,11 @@
 <div id="wrapper" class="container">
 	<div class="row">
-		<div class="col-md-9 col-sm-12">
+		<div class="col-sm-9 col-xs-12">
 			<div class="goods-details">
-				<div class="img-area col-xs-4">
+				<div class="img-area col-sm-4 col-xs-12">
 					<img src="<?php echo $details->pict_url ?>" alt="<?php echo $details->title ?>" title="<?php echo $details->title ?>" class="img-responsive">
 				</div>
-				<div class="info-area col-xs-8">
+				<div class="info-area col-sm-8 col-xs-12">
 					<div class="goods-title">
 						<?php echo $details->short_title ?>
 					</div>
@@ -35,7 +35,7 @@
 				<?php foreach($small_imgs as $small_img){echo '<img src="'.$small_img.'" class="img-responsive">';}?>
 			</div>
 		</div>
-		<div class="col-md-3 guess-area visible-md">
+		<div class="col-sm-3 guess-area hidden-xs">
 			<?php
 			foreach($guess_like->result() as $like){?>
 				<div class="guess">
