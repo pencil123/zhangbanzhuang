@@ -75,7 +75,12 @@ class M_item extends CI_Model{
             $select_sql = "select id from category where parent_id = (select id from category where category_nick = ?);";
             $id_query = $this->db->query($select_sql,$category_nick);
 
-            $this->db->where_in('my_category_id',$id_query->row_array());
+            $arr = array();
+            foreach ($id_query->result_array() as $row) {
+                array_push($arr,$row['id']);
+            }
+
+            $this->db->where_in('my_category_id',$arr);
 			$this->db->order_by('volume DESC');
 			$query = $this->db->get($this->item_table,$limit,$offset);
 			}
@@ -100,8 +105,15 @@ class M_item extends CI_Model{
 		}else{
 		    $select_sql = "select id from category where parent_id = (select id from category where category_nick = ?);";
 		    $id_query = $this->db->query($select_sql,$category_nick);
+
+		    $arr = array();
+		    foreach ($id_query->result_array() as $row) {
+                array_push($arr,$row['id']);
+            }
+		    var_dump($id_query->result_array());
+
 			$this->db->select('COUNT(1) AS count');
-			$this->db->where_in('my_category_id',$id_query->row_array());
+			$this->db->where_in('my_category_id',$arr);
 			$query = $this->db->get($this->item_table);
 			if ($query->num_rows() > 0)
 			{
