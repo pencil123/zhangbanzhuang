@@ -15,7 +15,7 @@
 			<?php foreach ($items->result() as $array):
 				//条目
 				?>
-				<article class="goods col-sm-6 col-md-4 col-lg-3 ">
+				<article class="goods col-xs-6 col-md-4 col-lg-3 ">
 					<div class="entry-content">
 						<div class="goods-pic">
 							<a href="/goods/info/<?php echo $array->id ?>.html" target="_blank">
