@@ -110,7 +110,7 @@ class M_item extends CI_Model{
 		    foreach ($id_query->result_array() as $row) {
                 array_push($arr,$row['id']);
             }
-		    var_dump($id_query->result_array());
+		    //var_dump($id_query->result_array());
 
 			$this->db->select('COUNT(1) AS count');
 			$this->db->where_in('my_category_id',$arr);
