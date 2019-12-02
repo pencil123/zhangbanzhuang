@@ -13,6 +13,7 @@
 	}
 	?>">
 	<link rel="shortcut icon" href="/juan.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="<?php	echo $site_description;	?>">
 	<link rel="stylesheet" type="text/css" media="all" href="<?php echo base_url()?>assets/bootstrap3.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="<?php echo base_url()?>assets/index.css?d=20120705" />
