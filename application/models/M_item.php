@@ -72,15 +72,11 @@ class M_item extends CI_Model{
 
 		//如果是分类页
 		if(!empty($cat)){
-			$this->db->select("id");
-			$query = $this->db->get_where($this->cat_table,array("category_nick"=>$cat));
-			$category_id = $query->row()->id;
+            $select_sql = "select id from category where parent_id = (select id from category where category_nick = ?);";
+            $id_query = $this->db->query($select_sql,$cat);
 
-			$where = "material.my_category_id=category.id AND parent_id='".$category_id."'";
-			$this->db->select('material.*');
-			$this->db->join($this->cat_table,$where);
-			$this->db->where(' coupon_end_time > ',$this->today);
-			$this->db->order_by('material.volume DESC');
+            $this->db->where_in('my_category_id',$id_query->row_array());
+			$this->db->order_by('volume DESC');
 			$query = $this->db->get($this->item_table,$limit,$offset);
 			}
 		//如果是主页
@@ -102,15 +98,11 @@ class M_item extends CI_Model{
 		if(empty($category_nick)){
 			return $this->db->count_all_results($this->item_table);
 		}else{
-			$this->db->select("id");
-			$query = $this->db->get_where($this->cat_table,array("category_nick"=>$category_nick));
-			$category_id = $query->row()->id;
-			$this->db->select('COUNT(material.id) AS count');
-			$where = "my_category_id=category.id AND parent_id='".$category_id."'";
-			$this->db->join($this->cat_table,$where);
-			$this->db->where(' coupon_end_time > ',$this->today);
+		    $select_sql = "select id from category where parent_id = (select id from category where category_nick = ?);";
+		    $id_query = $this->db->query($select_sql,$category_nick);
+			$this->db->select('COUNT(1) AS count');
+			$this->db->where_in('my_category_id',$id_query->row_array());
 			$query = $this->db->get($this->item_table);
-
 			if ($query->num_rows() > 0)
 			{
 			   $row = $query->row();

@@ -1,3 +1,14 @@
+<script type="text/javascript">
+  window.onload = function () {
+    var elems = document.getElementsByName("goods_imgs");
+    for (var i=0;i<elems.length;i++) {
+      //alert("width: " + elems[i].offsetWidth);
+      elems[i].style.height = elems[i].offsetWidth +"px";
+    }
+  };
+  //	reheight();
+</script>
+
 <div id="wrapper" class="container">
 	<?php if($items->num_rows()>0){ ?>
 		<div class="goods-all transitions-enabled masonry row">
@@ -42,13 +53,3 @@
 
 	<?php } ?>
 </div>
-<script type="text/javascript">
-	window.onload = function () {
-		var elems = document.getElementsByName("goods_imgs");
-		for (var i=0;i<elems.length;i++) {
-			//alert("width: " + elems[i].offsetWidth);
-			elems[i].style.height = elems[i].offsetWidth +"px";
-		}
-	};
-//	reheight();
-</script>

@@ -34,7 +34,7 @@ class M_cat extends CI_Model{
 			$query = $this->db->get_where($this->cat_table, array('category_nick'=>$category_nick_decode));
 			return $query->row();
 		}else {
-			return '';
+			return false;
 		}
 	}
 

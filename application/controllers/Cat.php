@@ -26,10 +26,16 @@ class Cat extends CI_Controller {
 	 */
 	public function index($category_nick,$page = 1)
 	{
+	    // 判断类别是否有效
+        $category_nick_decode = rawurldecode($category_nick);
+        $cat_header = $this->M_cat->get_cat_info($category_nick_decode);
+        if (!$cat_header) {
+            show_404("/");
+        }
 		$page = ($page ==1 ) ? $page : substr($page,0,-5);
 		$limit=40;
 		//每页显示数目
-		$category_nick_decode = rawurldecode($category_nick);
+
 		$config['base_url'] = site_url('/cat/'.$category_nick);
 		//site_url可以防止换域名代码错误。
 		$config['total_rows'] = $this->M_item->count_items($category_nick_decode);
@@ -50,7 +56,7 @@ class Cat extends CI_Controller {
 		//站点信息
 		$header['site_name'] = $this->config->item('site_name');
 		//分类标题
-		$cat_header = $this->M_cat->get_cat_info($category_nick_decode);
+
 		$header['site_title'] = $cat_header->category_title;
 		$header['site_keyword'] = $cat_header->category_keyword;
 		$header['site_description'] = $cat_header->category_description;
