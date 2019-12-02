@@ -25,7 +25,7 @@
 						<p class="title-area">
 							<span class="shop-type">天猫</span><?php echo $array->short_title ?>
 						</p>
-						<div class="raw-price-area">
+						<div class="raw-price-area hidden-xs">
 							现价：¥<?php echo $array->zk_final_price ?>
 							<p class="sold">30天销售:<?php echo $array->volume ?></p>
 						</div>
