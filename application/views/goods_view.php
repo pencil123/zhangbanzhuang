@@ -1,6 +1,6 @@
 <div id="wrapper" class="container">
 	<div class="row">
-		<div class="col-xs-9">
+		<div class="col-md-9 col-sm-12">
 			<div class="goods-details">
 				<div class="img-area col-xs-4">
 					<img src="<?php echo $details->pict_url ?>" alt="<?php echo $details->title ?>" title="<?php echo $details->title ?>" class="img-responsive">
@@ -35,7 +35,7 @@
 				<?php foreach($small_imgs as $small_img){echo '<img src="'.$small_img.'" class="img-responsive">';}?>
 			</div>
 		</div>
-		<div class="col-xs-3 guess-area">
+		<div class="col-md-3 guess-area visible-md">
 			<?php
 			foreach($guess_like->result() as $like){?>
 				<div class="guess">
