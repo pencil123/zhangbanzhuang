@@ -52,7 +52,7 @@
 			</div>
 		</div>
 
-		<div class="col-md-3 hidden-sm">
+		<div class="col-md-3 visible-md">
 			<a href="<?php echo site_url();?>" title="dfgfd" rel="home">
 				<img src="/assets/img/logo2.png" class="img-responsive">
 			</a>
