@@ -39,6 +39,7 @@ class Cat extends CI_Controller {
 		$config['base_url'] = site_url('/cat/'.$category_nick);
 		//site_url可以防止换域名代码错误。
 		$config['total_rows'] = $this->M_item->count_items($category_nick_decode);
+		echo $this->db->last_query();
 		//这是模型里面的方法，获得总数。
 		$config['suffix'] = '.html';
 		$config['per_page'] = $limit;
@@ -66,7 +67,6 @@ class Cat extends CI_Controller {
 		//分类标题
 		$header['cat']=$this->M_cat->get_all_cat();
 		$header['cat_slug'] = $category_nick_decode;
-
 		//所有条目数据
 		$data['items']=$this->M_item->get_all_item($limit,($page-1)*$limit,$category_nick_decode);
 		$this->load->view("header",$header);

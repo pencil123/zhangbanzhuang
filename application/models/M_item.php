@@ -67,13 +67,13 @@ class M_item extends CI_Model{
 	//获得所有条目
 	//$limit为每页书目，必填
 	//$offset为偏移，必填
-	function get_all_item($limit='40',$offset='0',$cat='')
+	function get_all_item($limit='40',$offset='0',$category_nick='')
 	{
 
 		//如果是分类页
-		if(!empty($cat)){
+		if(!empty($category_nick)){
             $select_sql = "select id from category where parent_id = (select id from category where category_nick = ?);";
-            $id_query = $this->db->query($select_sql,$cat);
+            $id_query = $this->db->query($select_sql,$category_nick);
 
             $this->db->where_in('my_category_id',$id_query->row_array());
 			$this->db->order_by('volume DESC');
