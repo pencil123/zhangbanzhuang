@@ -29,9 +29,9 @@
 
 <header id="branding" role="banner">
 	<div id="site-title" class="container">
-		<div class="col-xs-3">
+		<div class="col-3">
 			<a href="<?php echo site_url();?>" title="dfgfd" rel="home">
-				<img src="/assets/img/logo.png" class="img-responsive">
+				<img src="/assets/img/logo.png" class="img-fluid">
 			</a>
 		</div>
 
@@ -56,7 +56,7 @@
 
 		<div class="col-md-3 hidden-xs hidden-sm">
 			<a href="<?php echo site_url();?>" title="dfgfd" rel="home">
-				<img src="/assets/img/logo2.png" class="img-responsive">
+				<img src="/assets/img/logo2.png" class="img-fluid">
 			</a>
 		</div>
 	</div>
