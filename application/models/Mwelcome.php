@@ -83,7 +83,6 @@ class Mwelcome extends CI_Model{
 	function searchItems_count($keyword){
 		$this->db->like('title',$keyword);
 		$this->db->or_like('level_one_category_name',$keyword);
-		$this->db->where(' coupon_end_time > ',$this->today);
 		$query = $this->db->get($this->item_table);
 		return $query->num_rows();
 	}
@@ -98,7 +97,6 @@ class Mwelcome extends CI_Model{
 		$this->db->like('title',$keyword);
 		$this->db->or_like('short_title',$keyword);
 		$this->db->or_like('level_one_category_name',$keyword);
-		$this->db->where(' coupon_end_time > ',$this->today);
 		$this->db->order_by('volume DESC');
 		$query = $this->db->get($this->item_table,$limit,$offset);
 		return $query;
