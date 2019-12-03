@@ -21,7 +21,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 // --------------------------------------------------------------------------
 
 $config['uri_segment'] = 3;
-$config['num_links'] = 3;
+$config['num_links'] = 2;
 //$config['page_query_string'] = TRUE;
 // $config['use_page_numbers'] = TRUE;
 //$config['query_string_segment'] = '';
