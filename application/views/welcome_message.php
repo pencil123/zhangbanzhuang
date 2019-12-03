@@ -19,7 +19,7 @@
 					<div class="entry-content">
 						<div class="goods-pic">
 							<a href="/goods/info/<?php echo $array->id ?>.html" target="_blank">
-							<img src="<?php echo $array->pict_url ?>" alt="<?php echo $array->title ?>" title="<?php echo $array->title ?>"  class="img-responsive" name="goods_imgs">
+							<img src="<?php echo $array->pict_url ?>_300x300.jpg" alt="<?php echo $array->title ?>" title="<?php echo $array->title ?>"  class="img-responsive" name="goods_imgs">
 							</a>
 						</div>
 						<p class="title-area">

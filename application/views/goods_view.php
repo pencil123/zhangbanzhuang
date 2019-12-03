@@ -40,7 +40,7 @@
 			foreach($guess_like->result() as $like){?>
 				<div class="guess">
 					<a href="/goods/info/<?php echo $like->goods_id?>.html">
-						<img src="<?php echo $like->goods_img ?>" class="img-responsive"><p><?php echo $like->goods_name ?></p></a>
+						<img src="<?php echo $like->goods_img ?>_300x300.jpg" class="img-responsive"><p><?php echo $like->goods_name ?></p></a>
 					<div class="clearfloat"></div>
 				</div>
 			<?php }?>
