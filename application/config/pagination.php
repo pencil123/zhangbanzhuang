@@ -41,11 +41,11 @@ $config['last_link'] = FALSE;
 $config['last_tag_open'] = '<li class="next page">';
 $config['last_tag_close'] = '</li>';*/
 
-$config['next_link'] = '下一页 &gt;';
+$config['next_link'] = '下一页';
 $config['next_tag_open'] = '<li class="next page">';
 $config['next_tag_close'] = '</li>';
 
-$config['prev_link'] = '&lt;上一页';
+$config['prev_link'] = '上一页';
 $config['prev_tag_open'] = '<li class="prev page">';
 $config['prev_tag_close'] = '</li>';
 
