@@ -43,9 +43,6 @@ class Cat extends CI_Controller {
 		//这是模型里面的方法，获得总数。
 		$config['suffix'] = '.html';
 		$config['per_page'] = $limit;
-		$config['first_link'] = '首页';
-		$config['last_link'] = '尾页';
-		$config['num_links']=10;
 		$config['use_page_numbers'] = TRUE;
 		//上面是自定义文字以及左右的连接数
 		$this->pagination->initialize($config);
