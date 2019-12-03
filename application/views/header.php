@@ -64,21 +64,16 @@
 </header>
 
 
-<nav class="navbar navbar-expand-md navbar-style navbar-static-top navbar-dark">
-	<div class="container">
-	<a class="navbar-brand" href="#">券</a>
-	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-		<span class="navbar-toggler-icon"></span>
-	</button>
-  <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-    <ul class="navbar-nav nav-pills">
-        <?php
-        $is_home = '';
-        if(empty($cat_slug)){
-            $is_home = 'active';
-        }
-        ?>
-      <li role="presentation" class="nav-item"><a href="<?php echo site_url()?>" class="nav-link  <?php echo $is_home;?>">全部</a></li>
+<nav class="navbar navbar-expand-md navbar-static-top navbar-dark" style="background-color: red">
+	<div class="menu-container">
+		<div class="navbar-style">
+			<a class="navbar-brand " href="/">优惠券</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon navbar-style"></span>
+			</button>
+		</div>
+		<div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+			<ul class="navbar-nav nav-pills">
         <?php
         foreach($cat->result() as $row){
             $is_current = '';

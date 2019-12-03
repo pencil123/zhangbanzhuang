@@ -54,11 +54,32 @@ body {
 }
 
 /* 主导航 */
+.navbar-brand {
+	margin-right: 2rem !important;
+	font-weight: 900 !important;
+	color: yellow !important;
+}
 .navbar-style {
 	background-color: red;
 	min-height: auto;
 	color: white;
 }
+
+/*.nav-item {
+	width: 5px;
+}
+
+@media (min-width: 576px) {
+	.nav-item {
+		width: 5px;
+	}
+}
+
+@media (min-width: 768px) {
+	.nav-item {
+		width: 5px;
+	}
+}*/
 
 .nav-link {
 	color: white !important;
@@ -386,4 +407,59 @@ body {
 }
 .main-footer {
 	display: block;margin: 20px 0 40px;clear: both;
+}
+
+
+
+
+
+.menu-container {
+	width: 100%;
+	padding-right: 15px;
+	padding-left: 15px;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+@media (min-width: 576px) {
+	.menu-container {
+		max-width: 540px;
+	}
+}
+
+@media (min-width: 768px) {
+	.menu-container {
+		max-width: 720px;
+	}
+}
+
+@media (min-width: 992px) {
+	.menu-container {
+		max-width: 960px;
+	}
+}
+
+@media (min-width: 1200px) {
+	.menu-container {
+		max-width: 1140px;
+	}
+}
+
+
+@media (max-width: 767.98px) {
+	.navbar-expand-md > .menu-container{
+		padding-right: 0;
+		padding-left: 0;
+	}
+}
+
+.navbar > .menu-container {
+	display: -ms-flexbox;
+	display: flex;
+	-ms-flex-wrap: wrap;
+	flex-wrap: wrap;
+	-ms-flex-align: center;
+	align-items: center;
+	-ms-flex-pack: justify;
+	justify-content: space-between;
 }
