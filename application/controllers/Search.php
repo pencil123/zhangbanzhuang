@@ -46,6 +46,7 @@ class Search extends CI_Controller {
 		$config['total_rows'] = $this->mwelcome->searchItems_count($keyword);
 		$config['use_page_numbers'] = TRUE;
 		$config['reuse_query_string'] = TRUE;
+		$config['suffix'] = '';
 		$this->pagination->initialize($config);
 		$data['pagination']=$this->pagination->create_links();
 

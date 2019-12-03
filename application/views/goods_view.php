@@ -5,7 +5,7 @@
 				<div class="img-area col-sm-4 col-xs-12">
 					<img src="<?php echo $details->pict_url ?>_300x300.jpg" alt="<?php echo $details->title ?>" title="<?php echo $details->title ?>" class="img-fluid">
 				</div>
-				<div class="info-area col-sm-8 col-xs-12">
+				<div class="info-area col-sm-8 col-xs-12 float-left">
 					<div class="goods-title">
 						<?php echo $details->short_title ?>
 					</div>

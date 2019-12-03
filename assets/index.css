@@ -60,16 +60,20 @@ body {
 	color: white;
 }
 
+.nav-link {
+	color: white !important;
+}
+
 .nav-pills > li a{
 	color: white;
 	font-weight: bold;
 	background-color: red;
 }
 
-.nav-pills > li.active a{
-	color: yellow;
+.nav-pills > li a.active{
+	color: yellow !important;
 	font-weight: bolder;
-	background-color: #C21F3A !important;
+	background-color:red !important;
 }
 
 .nav-pills > li a:hover,.nav-pills > li a:focus {
