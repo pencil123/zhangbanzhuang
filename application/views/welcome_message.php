@@ -9,7 +9,7 @@
   //	reheight();
 </script>
 
-<div id="wrapper" class="container">
+<ul id="wrapper" class="container">
 	<?php if($items->num_rows()>0){ ?>
 		<div class="goods-all transitions-enabled masonry row">
 			<?php foreach ($items->result() as $array):
@@ -45,11 +45,11 @@
 				</article>
 			<?php endforeach;?>
 		</div>
-		<div class="pagenav_wrapper">
-			<div class="pagenav">
+		<nav aria-label="Page navigation" style="text-align: center">
+			<ul class="pagination pagination-new">
 				<?=$pagination;?>
-			</div>
-		</div><!-- .pagenav_wrapper -->
+			</ul>
+		</nav ><!-- .pagenav_wrapper -->
 
 	<?php } ?>
 </div>

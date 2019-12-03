@@ -39,12 +39,9 @@ class Search extends CI_Controller {
 		//获取搜索关键词+过滤
 		$keyword = trim($this->input->get('keyword', TRUE),"'\"><");
 
-		$limit=40;
+		$limit=36;
 		$config['base_url'] = site_url('/search/index');
 		//$config['first_url'] = site_url('/welcome');
-		$config['first_link'] = '首页';
-		$config['last_link'] = '尾页';
-		$config['num_links']=10;
 		$config['per_page'] = $limit;
 		$config['total_rows'] = $this->mwelcome->searchItems_count($keyword);
 		$config['use_page_numbers'] = TRUE;

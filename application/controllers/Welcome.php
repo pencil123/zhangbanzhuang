@@ -57,13 +57,9 @@ class Welcome extends CI_Controller {
 		//分类标题
 		$header['cat']=$this->M_cat->get_all_cat();
 
-		$limit=40;
+		$limit=36;
 		$config['base_url'] = site_url('/welcome/page');
 		$config['first_url'] = site_url('/welcome');
-		$config['first_link'] = '首页';
-		$config['last_link'] = '尾页';
-		$config['suffix'] = '.html';
-		$config['num_links']=10;
 		$config['per_page'] = $limit;
 		$config['total_rows'] = $this->mwelcome->items_count();
 		$config['use_page_numbers'] = TRUE;

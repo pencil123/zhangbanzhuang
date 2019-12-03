@@ -67,7 +67,7 @@ class M_item extends CI_Model{
 	//获得所有条目
 	//$limit为每页书目，必填
 	//$offset为偏移，必填
-	function get_all_item($limit='40',$offset='0',$category_nick='')
+	function get_all_item($limit='36',$offset='0',$category_nick='')
 	{
 
 		//如果是分类页

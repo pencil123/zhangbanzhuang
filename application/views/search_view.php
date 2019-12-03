@@ -62,8 +62,8 @@ if($resp->num_rows() == 0){
 </div>
 
 
-<div class="pagenav_wrapper">
-	<div class="pagenav">
-		<?=$pagination;?>
-	</div>
-</div><!-- .pagenav_wrapper -->
+<nav aria-label="Page navigation" style="text-align: center">
+  <ul class="pagination pagination-new">
+      <?=$pagination;?>
+  </ul>
+</nav ><!-- .pagenav_wrapper -->
