@@ -66,30 +66,30 @@
 
 <nav class="navbar navbar-expand-md navbar-style navbar-static-top navbar-dark">
 	<div class="container">
-	<a class="navbar-brand" href="#">券</a>
-	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-		<span class="navbar-toggler-icon"></span>
-	</button>
-  <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-    <ul class="navbar-nav nav-pills">
-        <?php
-        $is_home = '';
-        if(empty($cat_slug)){
-            $is_home = 'active';
-        }
-        ?>
-      <li role="presentation" class="nav-item"><a href="<?php echo site_url()?>" class="nav-link  <?php echo $is_home;?>">全部</a></li>
-        <?php
-        foreach($cat->result() as $row){
-            $is_current = '';
-            if(!empty($cat_slug) && $row->category_nick == $cat_slug){
-                $is_current = 'active';
-            }
-            echo '<li role="presentation"  class="nav-item"><a  class="nav-link '.$is_current.'" href="'.site_url('cat/'.rawurlencode($row->category_nick)).'/">'.$row->category_name.'</a></li>';
-        }
-        ?>
-    </ul>
-  </div>
+		<a class="navbar-brand" href="#">优惠券</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+			<ul class="navbar-nav nav-pills">
+				<?php
+				$is_home = '';
+				if(empty($cat_slug)){
+					$is_home = 'active';
+				}
+				?>
+				<li role="presentation" class="nav-item"><a href="<?php echo site_url()?>" class="nav-link  <?php echo $is_home;?>">全部</a></li>
+				<?php
+				foreach($cat->result() as $row){
+					$is_current = '';
+					if(!empty($cat_slug) && $row->category_nick == $cat_slug){
+						$is_current = 'active';
+					}
+					echo '<li role="presentation"  class="nav-item"><a  class="nav-link '.$is_current.'" href="'.site_url('cat/'.rawurlencode($row->category_nick)).'/">'.$row->category_name.'</a></li>';
+				}
+				?>
+			</ul>
+		</div>
   </div>
 </nav>
 

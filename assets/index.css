@@ -60,6 +60,24 @@ body {
 	color: white;
 }
 
+.navbar-collapse {
+	position:absolute;
+	top: 56px;
+	z-index: 100;
+	background-color: red;
+	left: 0px;
+	border-top:5px solid yellow;
+}
+
+.navbar-nav {
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+
+.nav-item {
+	width: 60px;
+	float: left;
+}
 .nav-link {
 	color: white !important;
 }
