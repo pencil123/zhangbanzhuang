@@ -59,8 +59,14 @@ body {
 	min-height: auto;
 	color: white;
 }
-
+.navbar-brand {
+	font-weight: 700;
+}
 .navbar-collapse {
+	background-color: red;
+}
+
+.navbar-collapse-mobile {
 	position:absolute;
 	top: 56px;
 	z-index: 100;
@@ -72,11 +78,14 @@ body {
 .navbar-nav {
 	flex-direction: row;
 	flex-wrap: wrap;
+/*//	padding-left: 15px;*/
+	justify-content: center;
 }
 
 .nav-item {
 	width: 60px;
 	float: left;
+	text-align: center;
 }
 .nav-link {
 	color: white !important;

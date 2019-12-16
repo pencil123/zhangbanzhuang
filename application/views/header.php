@@ -73,13 +73,6 @@
 		<div class="collapse navbar-collapse" id="navbarTogglerDemo01">
 			<ul class="navbar-nav nav-pills">
 				<?php
-				$is_home = '';
-				if(empty($cat_slug)){
-					$is_home = 'active';
-				}
-				?>
-				<li role="presentation" class="nav-item"><a href="<?php echo site_url()?>" class="nav-link  <?php echo $is_home;?>">全部</a></li>
-				<?php
 				foreach($cat->result() as $row){
 					$is_current = '';
 					if(!empty($cat_slug) && $row->category_nick == $cat_slug){
