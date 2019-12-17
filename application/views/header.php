@@ -29,14 +29,14 @@
 
 <header id="branding" role="banner">
 	<div id="site-title" class="container">
-		<div class="col-3 float-left">
+		<div class="col-sm-3 d-none d-sm-block float-left">
 			<a href="<?php echo site_url();?>" title="dfgfd" rel="home">
-				<img src="/assets/img/logo.png" class="img-fluid">
+				<img src="/assets/img/logo.png" class="img-fluid logo-img">
 			</a>
 		</div>
 
 
-		<div class="col-md-6 col-xs-9 float-left">
+		<div class="col-sm-6 col-12 float-left">
 			<form action="<?php echo site_url('search/spring/');?>">
 				<div class="input-group">
 					<input  type="text" name="keyword" class="form-control">
@@ -54,7 +54,7 @@
 			</div>
 		</div>
 
-		<div class="col-md-3 hidden-xs hidden-sm float-left">
+		<div class="col-sm-3 d-none d-sm-block float-left">
 			<a href="<?php echo site_url();?>" title="dfgfd" rel="home">
 				<img src="/assets/img/logo2.png" class="img-fluid">
 			</a>
@@ -64,27 +64,25 @@
 </header>
 
 
-<nav class="navbar navbar-expand-md navbar-static-top navbar-dark" style="background-color: red">
-	<div class="menu-container">
-		<div class="navbar-style">
-			<a class="navbar-brand " href="/">优惠券</a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon navbar-style"></span>
-			</button>
-		</div>
+<nav class="navbar navbar-expand-md navbar-style navbar-static-top navbar-dark">
+	<div class="container">
+		<a class="navbar-brand" href="/">优惠券</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
 		<div class="collapse navbar-collapse" id="navbarTogglerDemo01">
 			<ul class="navbar-nav nav-pills">
-        <?php
-        foreach($cat->result() as $row){
-            $is_current = '';
-            if(!empty($cat_slug) && $row->category_nick == $cat_slug){
-                $is_current = 'active';
-            }
-            echo '<li role="presentation"  class="nav-item"><a  class="nav-link '.$is_current.'" href="'.site_url('cat/'.rawurlencode($row->category_nick)).'/">'.$row->category_name.'</a></li>';
-        }
-        ?>
-    </ul>
-  </div>
+				<?php
+				foreach($cat->result() as $row){
+					$is_current = '';
+					if(!empty($cat_slug) && $row->category_nick == $cat_slug){
+						$is_current = 'active';
+					}
+					echo '<li role="presentation"  class="nav-item"><a  class="nav-link '.$is_current.'" href="'.site_url('cat/'.rawurlencode($row->category_nick)).'/">'.$row->category_name.'</a></li>';
+				}
+				?>
+			</ul>
+		</div>
   </div>
 </nav>
 

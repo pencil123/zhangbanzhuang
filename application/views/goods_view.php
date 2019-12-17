@@ -1,6 +1,6 @@
 <div id="wrapper" class="container">
 	<div class="row">
-		<div class="col-sm-9 col-xs-12">
+		<div class="col-sm-9 col-12">
 			<div class="goods-details">
 				<div class="img-area col-sm-4 col-xs-12">
 					<img src="<?php echo $details->pict_url ?>_300x300.jpg" alt="<?php echo $details->title ?>" title="<?php echo $details->title ?>" class="img-fluid">
@@ -35,10 +35,10 @@
 				<?php foreach($small_imgs as $small_img){echo '<img src="'.$small_img.'" class="img-fluid">';}?>
 			</div>
 		</div>
-		<div class="col-sm-3 guess-area hidden-xs">
+		<div class="col-sm-3 col-12 guess-area hidden-xs">
 			<?php
 			foreach($guess_like->result() as $like){?>
-				<div class="guess">
+				<div class="guess col-sm-12 col-6">
 					<a href="/goods/info/<?php echo $like->goods_id?>.html">
 						<img src="<?php echo $like->goods_img ?>_300x300.jpg" class="img-fluid"><p><?php echo $like->goods_name ?></p></a>
 					<div class="clearfloat"></div>

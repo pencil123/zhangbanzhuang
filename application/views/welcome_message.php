@@ -9,7 +9,7 @@
   //	reheight();
 </script>
 
-<ul id="wrapper" class="container">
+<div id="wrapper" class="container">
 	<?php if($items->num_rows()>0){ ?>
 		<div class="goods-all transitions-enabled masonry row">
 			<?php foreach ($items->result() as $array):
@@ -27,7 +27,7 @@
 						</p>
 						<div class="raw-price-area hidden-xs">
 							现价：¥<?php echo $array->zk_final_price ?>
-							<p class="sold">30天销售:<?php echo $array->volume ?></p>
+							<span class="sold">已售:<?php echo $array->volume ?></span>
 						</div>
 						<span class="info">
 							<div class="price-area">
