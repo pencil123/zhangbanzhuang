@@ -17,5 +17,6 @@ jQuery(document).ready(function (e) {
 		if( $(window).width() <= 576){
 			$('.btn-outline-secondary').val("搜索");
 			$('.goods-title').css('text-align','center');
+			$('.buy-now a').css('width','150');
 		}
 });

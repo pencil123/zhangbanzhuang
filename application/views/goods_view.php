@@ -15,7 +15,7 @@
 							<div class="discounted">卷后价格：<?php echo $details->zk_final_price - $details->coupon_amount ?></div>
 						</div>
 						<div class="buy-now">
-							<a href="/jumper/coupon/<?php echo $details->id ?>.html" target="_blank"> 领券立减<?php echo $details->coupon_amount ?>元</a>
+							<a href="/jumper/coupon/<?php echo $details->id ?>.html" target="_blank"> 优惠券 ¥<?php echo $details->coupon_amount ?></a>
 						</div>
 					</div>
 					<div class="shop-info">
@@ -40,7 +40,7 @@
 			foreach($guess_like->result() as $like){?>
 				<div class="guess col-sm-12 col-6">
 					<a href="/goods/info/<?php echo $like->goods_id?>.html">
-						<img src="<?php echo $like->goods_img ?>_300x300.jpg" class="img-fluid"><p><?php echo $like->goods_name ?></p></a>
+						<img src="<?php echo $like->goods_img ?>_300x300.jpg" class="img-fluid img-guess" name="img-guess"><p><?php echo $like->goods_name ?></p></a>
 					<div class="clearfloat"></div>
 				</div>
 			<?php }?>
@@ -49,6 +49,14 @@
 </div>
 
 <script type="text/javascript">
+	window.onload = function () {
+		var elems = document.getElementsByName("img-guess");
+		for (var i=0;i<elems.length;i++) {
+			//alert("width: " + elems[i].offsetWidth);
+			elems[i].style.height = elems[i].offsetWidth +"px";
+		}
+	};
+
   function is_weixin() {
     var ua = navigator.userAgent.toLowerCase();
     if (ua.match(/MicroMessenger/i) == "micromessenger") {
