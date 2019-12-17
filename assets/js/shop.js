@@ -11,4 +11,11 @@ jQuery(document).ready( function( $){
 	//	alert(navbar.hasClass('navbar-collapse'));
 	//	navbar.toggleClass('navbar-collapse').toggleClass('navbar-collapse-mobile');
 	});
-})
+});
+
+jQuery(document).ready(function (e) {
+		if( $(window).width() <= 576){
+			$('.btn-outline-secondary').val("搜索");
+			$('.goods-title').css('text-align','center');
+		}
+});
