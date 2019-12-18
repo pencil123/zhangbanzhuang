@@ -418,3 +418,35 @@ body {
 .main-footer {
 	display: block;margin: 20px 0 40px;clear: both;
 }
+
+
+/* =404 page not found
+-------------------------------------------------------------- */
+#wrapper_not_found{
+	margin: 10px auto 20px;
+}
+
+.not_found{
+	display: block;
+}
+
+.not_found h1 {
+	text-align:center;
+	font-size: 100px;
+}
+
+.not_found h2 {
+	text-align:center;
+	font-size: 40px;
+}
+.not_found h3 {
+	margin-top:30px;
+	font-weight: bolder;
+	text-align:center;
+	font-size: 40px;
+}
+
+.not_found h3 a{
+	color: red;
+	text-decoration: none;
+}

@@ -30,11 +30,16 @@ class Cat extends CI_Controller {
         $category_nick_decode = rawurldecode($category_nick);
         $cat_header = $this->M_cat->get_cat_info($category_nick_decode);
         if (!$cat_header) {
-            show_404("/");
+			show_404();
         }
 		$page = ($page ==1 ) ? $page : substr($page,0,-5);
 		$limit=36;
 		//每页显示数目
+		//所有条目数据
+		$data['items']=$this->M_item->get_all_item($limit,($page-1)*$limit,$category_nick_decode);
+		if(!$data['items']->num_rows()){
+			show_404();
+		}
 
 		$config['base_url'] = site_url('/cat/'.$category_nick);
 		//site_url可以防止换域名代码错误。
@@ -64,8 +69,7 @@ class Cat extends CI_Controller {
 		//分类标题
 		$header['cat']=$this->M_cat->get_all_cat();
 		$header['cat_slug'] = $category_nick_decode;
-		//所有条目数据
-		$data['items']=$this->M_item->get_all_item($limit,($page-1)*$limit,$category_nick_decode);
+
 		$this->load->view("header",$header);
 		$this->load->view('welcome_message',$data);
 		$this->load->view('footer');

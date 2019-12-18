@@ -31,10 +31,6 @@ class Welcome extends CI_Controller {
 	//	$this->load->helper('url_helper');
 	}
 
-	public function index(){
-		$this->page();
-	}
-
 	public function wechat($page = 1){
 	    $limit = 20;
         $result =$this->mwelcome->get_all_items($limit,($page-1)*$limit);
@@ -43,7 +39,7 @@ class Welcome extends CI_Controller {
         echo json_encode($data);
     }
 
-	public function page($page = 1)
+	public function index($page = 1)
 	{
 		$this->config->load('site_info');
 		//站点信息
@@ -58,8 +54,8 @@ class Welcome extends CI_Controller {
 		$header['cat']=$this->M_cat->get_all_cat();
 
 		$limit=36;
-		$config['base_url'] = site_url('/welcome/page');
-		$config['first_url'] = site_url('/welcome');
+		$config['base_url'] = site_url('/welcome/index/');
+		$config['first_url'] = site_url('/');
 		$config['per_page'] = $limit;
 		$config['total_rows'] = $this->mwelcome->items_count();
 		$config['use_page_numbers'] = TRUE;

@@ -69,7 +69,6 @@ class M_item extends CI_Model{
 	//$offset为偏移，必填
 	function get_all_item($limit='36',$offset='0',$category_nick='')
 	{
-
 		//如果是分类页
 		if(!empty($category_nick)){
             $select_sql = "select id from category where parent_id = (select id from category where category_nick = ?);";
