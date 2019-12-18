@@ -65,6 +65,9 @@ class Welcome extends CI_Controller {
 		//条目数据
 		$page = ($page ==1 ) ? $page : substr($page,0,-5);
 		$data['items']=$this->mwelcome->get_all_items($limit,($page-1)*$limit);
+		if(!$data['items']->num_rows()){
+			show_404();
+		}
 		$this->load->view("header",$header);
 		$this->load->view('welcome_message',$data);
 		$this->load->view('footer');
