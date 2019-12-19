@@ -61,9 +61,9 @@
   function is_weixin() {
     var ua = navigator.userAgent.toLowerCase();
     if (ua.match(/MicroMessenger/i) == "micromessenger") {
-      return true;
-    } else {
       return false;
+    } else {
+      return true;
     }
   }
   var isWeixin = is_weixin();
@@ -71,7 +71,7 @@
   function loadHtml(){
     var div = document.createElement('div');
     div.id = 'weixin-tip';
-    div.innerHTML = '<p><img src="/assets/img/live_weixin.png" alt="微信打开"/></p>';
+    div.innerHTML = '<p><img src="/assets/img/live_weixin.png" alt="微信打开"/ class="img-fluid"></p>';
     document.body.appendChild(div);
   }
 

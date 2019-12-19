@@ -26,6 +26,10 @@ body {
 	white-space: nowrap;
 }
 
+.keyword-list a:hover{
+	text-decoration: none;
+}
+
 
 /* =Header
 -------------------------------------------------------------- */
