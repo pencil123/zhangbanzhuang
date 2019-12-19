@@ -393,7 +393,10 @@ body {
 }
 
 .guess p{
-	margin-top:8px;
+	margin: 4px auto 4px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .guess a{
