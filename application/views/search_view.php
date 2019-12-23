@@ -37,7 +37,7 @@ if($resp->num_rows() == 0){
 				</p>
 				<div class="raw-price-area hidden-xs">
 					现价：¥<?php echo $array->zk_final_price ?>
-					<p class="sold">30天销售:<?php echo $array->volume ?></p>
+					<p class="sold">月售:<?php echo $array->volume ?></p>
 				</div>
 				<span class="info">
 							<div class="price-area">
